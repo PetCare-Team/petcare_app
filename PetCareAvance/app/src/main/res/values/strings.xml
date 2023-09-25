@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">PetCareAvance</string>
+    <string name="id">Ingrese ID</string>
+    <string name="navegar">Navegar</string>
+    <string name="id_menu">El ID Actual es:</string>
+    <string name="inicio">Inicio</string>
+    <string name="nav_inicio">Inicio</string>
+    <string name="nav_publicar">Publicar</string>
+    <string name="nav_soporte">Soporte</string>
+    <string name="nav_perfil">Perfil</string>
+    <string name="perfil">Perfil</string>
+    <string name="publicar">Publicar</string>
+    <string name="soporte">Soporte</string>
+
+    <string name="seleccionar_direccion">seleccionar direccion</string>
+    <string name="seleccionar_fecha">seleccionar fecha</string>
+    <string name="buscar">Buscar</string>
+
+    <string-array name="opciones">
+        <item>Ordenar por nombre A-Z</item>
+        <item>Ordenar por nombre Z-A</item>
+        <item>Ordenar por precio Mayor-Menor</item>
+        <item>Ordenar por precio Menor-Mayor</item>
+    </string-array>
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string name="combined_text">
+    Gracias por tu solicitud para ser paseador de perros en nuestra app.\n
+    Estamos revisando cuidadosamente cada solicitud antes de procesarla.\n
+    Pronto recibirás un correo con más detalles. ¡Gracias por tu paciencia!
+</string>
+</resources>

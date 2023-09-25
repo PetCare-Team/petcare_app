@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_inicio"
+        android:icon="?attr/actionModeSelectAllDrawable"
+
+        android:title="@string/nav_inicio" />
+
+    <item
+        android:id="@+id/nav_publicar"
+        android:icon="@android:drawable/ic_menu_add"
+        android:title="@string/nav_publicar"
+        android:textColor="@color/black"
+        />
+
+    <item
+        android:id="@+id/nav_soporte"
+        android:icon="@android:drawable/stat_sys_headset"
+        android:title="@string/nav_soporte" />
+
+    <item
+        android:id="@+id/nav_perfil"
+        android:icon="@android:drawable/ic_menu_my_calendar"
+        android:title="@string/nav_perfil" />
+</menu>

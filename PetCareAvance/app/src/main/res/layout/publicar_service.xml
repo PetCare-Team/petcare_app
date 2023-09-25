@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="Fragments.PublicarService">
+
+    <Button
+        android:id="@+id/btnService3"
+        android:layout_width="140dp"
+        android:layout_height="39dp"
+        android:background="@drawable/btn_background"
+        android:onClick="irAProcesoPublicacion"
+        android:text="Eliminar"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.885"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.791"
+        app:rippleColor="#FDFDFD" />
+
+    <Spinner
+        android:id="@+id/snrHour2"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:background="@drawable/edit_text_background"
+        android:padding="10sp"
+        android:paddingStart="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.531"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.678" />
+
+    <EditText
+        android:id="@+id/tvDirecc2"
+        android:layout_width="350dp"
+        android:layout_height="48dp"
+        android:background="@drawable/edit_text_background"
+        android:ems="10"
+        android:hint="Ingresa tu dirección"
+        android:inputType="text"
+
+        android:paddingStart="16dp"
+        android:text="Buenaaventura 1234"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.549"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.153"
+        tools:text="Buenaaventura 1234" />
+
+    <EditText
+        android:id="@+id/tmDescription2"
+        android:layout_width="352dp"
+        android:layout_height="67dp"
+        android:background="@drawable/edit_text_background"
+
+        android:ems="10"
+
+        android:hint="Descripción"
+        android:inputType="textMultiLine"
+        android:paddingStart="16dp"
+        android:text="¡Hola! Mi nombre es Xiomara y soy la madre de Joaquim, un perro de tamaño mediano que ..."
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.553"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.257"
+        tools:text="¡Hola! Mi nombre es Xiomara y soy la madre de Joaquim, un perro de tamaño mediano que ..." />
+
+    <EditText
+        android:id="@+id/editTextNumberDecimal2"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:background="@drawable/edit_text_background"
+        android:ems="10"
+        android:hint=" Costo servicio basico"
+        android:inputType="numberDecimal"
+        android:paddingStart="16dp"
+        android:text="s/10.00"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.557"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.474"
+        tools:text="s/10.00" />
+
+    <Spinner
+        android:id="@+id/Spinday"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+
+        android:background="@drawable/edit_text_background"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.524"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.58" />
+
+    <Switch
+        android:id="@+id/switch2"
+        android:layout_width="350dp"
+        android:layout_height="40dp"
+        android:text="Servicio de costo"
+
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.558"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.374" />
+
+    <Button
+        android:id="@+id/btnService2"
+        android:layout_width="140dp"
+        android:layout_height="39dp"
+        android:background="@drawable/btn_background"
+        android:onClick="irAProcesoPublicacion"
+        android:text="Guardar"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.114"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.791"
+        app:rippleColor="#FDFDFD" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mi Servicio"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.082" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="79dp"
+        android:layout_height="58dp"
+        android:onClick="retroceder"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_leftkey_foreground" />
+</androidx.constraintlayout.widget.ConstraintLayout>
