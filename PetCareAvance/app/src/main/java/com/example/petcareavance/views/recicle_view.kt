@@ -20,14 +20,28 @@ import retrofit2.http.GET
 class RecycleViewFragment : Fragment() {
 
     interface ApiService {
-        @GET("users")
+        @GET("services")
         fun getUsers(): Call<List<UserResponse>>
     }
 
     data class UserResponse(
-        val id: Int,
-        val name: String,
+        val serviceId: Int,
+        val price: Int,
+        val description: String,
+        val location: String,
+        val phone: Int,
+        val dni: Int,
+        val cuidador: Boolean,
+        val user: User,
     )
+
+    data class User(val id:Int,
+        val firstName: String,
+        val lastName:String,
+        val phone:Int,
+        val dni: Int,
+        val mail: String,
+        )
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -73,6 +87,7 @@ class RecycleViewFragment : Fragment() {
                 response: Response<List<UserResponse>>
             ) {
                 val responseBody = response.body()!!
+
                 val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
                 recyclerView.layoutManager = LinearLayoutManager(requireContext())
                 recyclerView.adapter = UserAdapter(responseBody)
@@ -98,14 +113,14 @@ class RecycleViewFragment : Fragment() {
 
         override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
             val user = userList[position]
-            holder.userName.text = user.name
-            holder.userIdAsPrice.text = user.id.toString()
+            holder.userName.text = user.user.firstName
+            holder.userIdAsPrice.text = user.description.toString()
         }
 
         override fun getItemCount() = userList.size
     }
 
     companion object {
-        const val BASE_URL = "https://jsonplaceholder.typicode.com/"
+        const val BASE_URL = "https://petcarebackend.azurewebsites.net/api/v1/"
     }
 }
