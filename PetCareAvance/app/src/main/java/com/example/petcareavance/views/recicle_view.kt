@@ -104,6 +104,7 @@ class RecycleViewFragment : Fragment() {
         class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             val userName: TextView = itemView.findViewById(R.id.userName)
             val userIdAsPrice: TextView = itemView.findViewById(R.id.userIdAsPrice)
+            val userAddress: TextView = itemView.findViewById(R.id.userAddress)
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
@@ -113,8 +114,9 @@ class RecycleViewFragment : Fragment() {
 
         override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
             val user = userList[position]
-            holder.userName.text = user.user.firstName
-            holder.userIdAsPrice.text = user.description.toString()
+            holder.userName.text = user.user.firstName + " " +  user.user.lastName
+            holder.userIdAsPrice.text = "S/. " + user.price.toString()
+            holder.userAddress.text = user.location
         }
 
         override fun getItemCount() = userList.size
