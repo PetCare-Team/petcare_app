@@ -7,31 +7,37 @@
     tools:context=".MainActivity">
 
     <EditText
-        android:id="@+id/etID"
-        android:layout_width="200dp"
-        android:layout_height="52dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="252dp"
-        android:hint="@string/id"
-        android:inputType="number"
-        app:layout_constraintBottom_toTopOf="@+id/btnNavigate"
+        android:id="@+id/etEmail"
+        android:layout_width="331dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="240dp"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/etPassword"
+        android:layout_width="329dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="304dp"
+        android:hint="@string/contrasena"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="376dp"
+        android:text="Ingresar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btnNavigate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/etID"
-        android:layout_centerHorizontal="true"
-        android:background="#FBB847"
-        android:text="@string/navegar"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

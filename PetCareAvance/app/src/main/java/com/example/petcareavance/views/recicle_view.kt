@@ -36,12 +36,12 @@ class RecycleViewFragment : Fragment() {
     )
 
     data class User(val id:Int,
-        val firstName: String,
-        val lastName:String,
-        val phone:Int,
-        val dni: Int,
-        val mail: String,
-        )
+                    val firstName: String,
+                    val lastName:String,
+                    val phone:Int,
+                    val dni: Int,
+                    val mail: String,
+    )
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

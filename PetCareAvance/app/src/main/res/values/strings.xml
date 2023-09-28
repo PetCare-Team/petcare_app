@@ -31,4 +31,6 @@
     Estamos revisando cuidadosamente cada solicitud antes de procesarla.\n
     Pronto recibirás un correo con más detalles. ¡Gracias por tu paciencia!
 </string>
+    <string name="email">Correo electrónico</string>
+    <string name="contrasena">Contraseña</string>
 </resources>

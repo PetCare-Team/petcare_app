@@ -16,12 +16,6 @@ class MenuActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
 
-        val textViewID = findViewById<TextView>(R.id.tvID)
-
-        val sharedPreferences = getSharedPreferences("UserID", MODE_PRIVATE)
-        val id = sharedPreferences.getString("ID", "No ID")
-        textViewID.text = "El ID actual es: $id"
-
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNav.setOnNavigationItemSelectedListener(navListener);
 
