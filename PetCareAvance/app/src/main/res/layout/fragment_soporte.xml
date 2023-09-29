@@ -30,7 +30,7 @@
 
     <LinearLayout
         android:id="@+id/llQuestion1Container"
-        android:layout_width="360dp"
+        android:layout_width="353dp"
         android:layout_height="70dp"
         android:layout_marginTop="24dp"
         android:background="@drawable/support_border"

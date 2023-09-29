@@ -12,6 +12,14 @@
     <string name="publicar">Publicar</string>
     <string name="soporte">Soporte</string>
 
+    <string name="name_sign_up_spaceholder">Nombre</string>
+    <string name="lastname_sign_up_spaceholder">Apellido</string>
+    <string name="phone_sign_up_spaceholder">Celular</string>
+    <string name="dni_sign_up_spaceholder">DNI</string>
+    <string name="mail_sign_up_spaceholder">Correo</string>
+    <string name="password_sign_up_spaceholder">Contrasenia</string>
+
+
     <string name="seleccionar_direccion">seleccionar direccion</string>
     <string name="seleccionar_fecha">seleccionar fecha</string>
     <string name="buscar">Buscar</string>

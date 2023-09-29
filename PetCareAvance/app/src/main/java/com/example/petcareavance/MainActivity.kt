@@ -6,8 +6,11 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.petcareavance.Fragments.LogInFragment
+import com.example.petcareavance.Fragments.SignUpFragment
 import com.example.petcareavance.api.RetrofitClient
 import com.example.petcareavance.api.UserInfo
 import com.example.petcareavance.api.UserResponse
@@ -21,42 +24,26 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val etEmail = findViewById<EditText>(R.id.etEmail)
-        val etPassword = findViewById<EditText>(R.id.etPassword)
-        val btnLogin = findViewById<Button>(R.id.btnLogin)
+        val btnLogin = findViewById<Button>(R.id.mainLogIn)
+        val btnSignUp = findViewById<Button>(R.id.mainSignUp)
+        val fragmentContainer = findViewById<FrameLayout>(R.id.fragment_container)
 
         btnLogin.setOnClickListener {
-            val email = etEmail.text.toString()
-            val password = etPassword.text.toString()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, LogInFragment())
+                .commit()
+            fragmentContainer.bringToFront() // Mueve el FrameLayout al frente
+            btnLogin.visibility = View.GONE // Esconde el botón de login
+            btnSignUp.visibility = View.GONE // Esconde el botón de signup
+        }
 
-            if (email.isNotEmpty() && password.isNotEmpty()) {
-                val call = RetrofitClient.instance.signIn(UserInfo(email, password))
-                call.enqueue(object : Callback<UserResponse> {
-                    override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
-                        if (response.isSuccessful) {
-                            val id = response.body()?.id.toString()
-                            val sharedPreferences = getSharedPreferences("UserID", MODE_PRIVATE)
-                            val editor: SharedPreferences.Editor = sharedPreferences.edit()
-                            editor.putString("ID", id)
-                            editor.apply()
-                            val intent = Intent(this@MainActivity, MenuActivity::class.java)
-                            startActivity(intent)
-                        } else {
-                            Toast.makeText(
-                                this@MainActivity,
-                                "Error: ${response.code()}",
-                                Toast.LENGTH_LONG
-                            ).show()
-                        }
-                    }
-
-                    override fun onFailure(call: Call<UserResponse>, t: Throwable) {
-                        Toast.makeText(this@MainActivity, "Error: ${t.localizedMessage}", Toast.LENGTH_LONG).show()
-                    }
-                })
-            } else {
-                Toast.makeText(this, "Por favor, rellena todos los campos", Toast.LENGTH_SHORT).show()
-            }
+        btnSignUp.setOnClickListener {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, SignUpFragment())
+                .commit()
+            fragmentContainer.bringToFront() // Mueve el FrameLayout al frente
+            btnLogin.visibility = View.GONE // Esconde el botón de login
+            btnSignUp.visibility = View.GONE // Esconde el botón de signup
         }
     }
 }
