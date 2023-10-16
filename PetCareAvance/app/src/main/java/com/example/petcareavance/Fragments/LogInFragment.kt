@@ -59,14 +59,22 @@ class LogInFragment : Fragment(){
                         response: Response<UserResponse>
                     ) {
                         if (response.isSuccessful) {
+                            val token = response.body()?.token
                             val id = response.body()?.id.toString()
                             val sharedPreferences = requireActivity().getSharedPreferences(
                                 "UserID",
                                 AppCompatActivity.MODE_PRIVATE
                             )
+                            val sharedPreferences2 = requireActivity().getSharedPreferences(
+                                "UserToken",
+                                AppCompatActivity.MODE_PRIVATE
+                            )
                             val editor: SharedPreferences.Editor = sharedPreferences.edit()
                             editor.putString("ID", id)
                             editor.apply()
+                            val editor2: SharedPreferences.Editor= sharedPreferences2.edit()
+                            editor2.putString("Token",token)
+                            editor2.apply()
                             val intent = Intent(requireActivity(), MenuActivity::class.java)
                             startActivity(intent)
                             requireActivity().finish()

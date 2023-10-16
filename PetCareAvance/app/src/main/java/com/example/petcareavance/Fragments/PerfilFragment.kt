@@ -45,8 +45,12 @@ class   PerfilFragment : Fragment() {
         val sharedPreferences = requireActivity().getSharedPreferences("UserID", Context.MODE_PRIVATE)
         val userId = sharedPreferences.getString("ID", "") ?: ""
 
+        // Obtener Token de SharedPreferences
+        val sharedPreferences2 = requireActivity().getSharedPreferences("UserToken", Context.MODE_PRIVATE)
+        val token = sharedPreferences.getString("Token", "") ?: ""
+
         // Realizar la llamada a la API
-        val call = apiService.getUserProfile(userId)
+        val call = apiService.getUserProfile( "Bearer " + token , userId)
         call.enqueue(object : Callback<UserResponse2> {
             override fun onResponse(call: Call<UserResponse2>, response: Response<UserResponse2>) {
                 if (response.isSuccessful) {

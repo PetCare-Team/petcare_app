@@ -15,5 +15,5 @@ data class UserInfo(val mail: String, val password: String)
 
 data class UserSignInInfo(val mail: String, val password: String, val firstName: String,
                           val lastName: String,val phone: Int, val typeUserId: Int, val dni: Int )
-data class UserResponse(val id: Int)
+data class UserResponse(val id: Int, val token: String)
 data class UserResponseForSingUp(val message: String)
