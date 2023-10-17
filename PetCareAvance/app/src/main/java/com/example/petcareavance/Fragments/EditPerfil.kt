@@ -27,6 +27,8 @@ class EditPerfil : Fragment() {
 
 
 
+
+
         return view
     }
 

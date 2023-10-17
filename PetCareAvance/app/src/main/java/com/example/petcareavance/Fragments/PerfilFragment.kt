@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -41,6 +42,14 @@ class   PerfilFragment : Fragment() {
             avanzar()
         }
 
+        val imMascotas= view.findViewById<ImageView>(R.id.ivMascotas)
+
+        imMascotas.setOnClickListener{
+
+           avanzarMascota()
+
+        }
+
         // Obtener User ID de SharedPreferences
         val sharedPreferences = requireActivity().getSharedPreferences("UserID", Context.MODE_PRIVATE)
         val userId = sharedPreferences.getString("ID", "") ?: ""
@@ -75,10 +84,22 @@ class   PerfilFragment : Fragment() {
     }
 
     private fun avanzar() {
-        val editPerfilFragment = EditPerfil()
+        val editPerfilFragment = PetFragment()
         val transaction = requireFragmentManager().beginTransaction()
         transaction.replace(R.id.fragment_container, editPerfilFragment)
         transaction.addToBackStack(null)
         transaction.commit()
     }
+
+    private fun avanzarMascota() {
+        val MascotaFragment = PetFragment()
+        val transaction = requireFragmentManager().beginTransaction()
+        transaction.replace(R.layout.fragment_perfil ,MascotaFragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
+    }
+
+
+
+
 }
