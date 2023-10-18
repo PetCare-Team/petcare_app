@@ -11,7 +11,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.petcareavance.R
-import com.example.petcareavance.api.PetResponse
+import com.example.petcareavance.api.dataclasses.pets.PetResponse
 import com.example.petcareavance.api.RetrofitClient
 import retrofit2.Call
 import retrofit2.Callback
@@ -22,8 +22,10 @@ class PetFragment : Fragment() {
 
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?
+    ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_pet, container, false)
 
@@ -32,7 +34,7 @@ class PetFragment : Fragment() {
         // Obtener User ID de SharedPreferences
         val sharedPreferences =
             requireActivity().getSharedPreferences("UserID", Context.MODE_PRIVATE)
-        val userId = sharedPreferences.getString("ID", "") ?: ""
+        val userId =  "12"//sharedPreferences.getString("ID", "") ?: ""
 
         // Obtener Token de SharedPreferences
         val sharedPreferences2 =
