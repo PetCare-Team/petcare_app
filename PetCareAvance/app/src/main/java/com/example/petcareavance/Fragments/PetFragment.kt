@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.petcareavance.R
@@ -50,7 +51,11 @@ class PetFragment : Fragment() {
             ) {
                 val responseBody = response.body()!!
 
-                rvListPet.layoutManager = LinearLayoutManager(requireContext())
+                Toast.makeText(requireContext(), "Tamaño: ${responseBody.size}", Toast.LENGTH_LONG).show()
+
+                val gridLayoutManager = GridLayoutManager(requireContext(),2)
+
+                rvListPet.layoutManager = gridLayoutManager
                 rvListPet.adapter = PetAdapter(responseBody)
             }
 

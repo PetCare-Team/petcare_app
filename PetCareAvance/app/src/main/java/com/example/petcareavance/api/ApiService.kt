@@ -12,7 +12,7 @@ interface ApiService {
     fun signIn(@Body userInfo: UserInfo): Call<UserResponse>
     @POST("api/v1/users/sign-up")
     fun signUp(@Body userSignInInfo: UserSignInInfo): Call<UserResponseForSingUp>
-    @GET("api/v1/userId/pets")
+    @GET("api/v1/pet/{userId}/pet")
     fun getPetByUser(@Header("Authorization")
                      token: String,@Path("userId") userId: String): Call<List<PetResponse>>
 }

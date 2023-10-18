@@ -84,7 +84,7 @@ class   PerfilFragment : Fragment() {
     }
 
     private fun avanzar() {
-        val editPerfilFragment = PetFragment()
+        val editPerfilFragment = EditPerfil()
         val transaction = requireFragmentManager().beginTransaction()
         transaction.replace(R.id.fragment_container, editPerfilFragment)
         transaction.addToBackStack(null)
@@ -94,7 +94,7 @@ class   PerfilFragment : Fragment() {
     private fun avanzarMascota() {
         val MascotaFragment = PetFragment()
         val transaction = requireFragmentManager().beginTransaction()
-        transaction.replace(R.layout.fragment_perfil ,MascotaFragment)
+        transaction.replace(R.id.fragment_container ,MascotaFragment)
         transaction.addToBackStack(null)
         transaction.commit()
     }
