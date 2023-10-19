@@ -8,12 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.petcareavance.R
-import com.example.petcareavance.api.PetResponse
+import com.example.petcareavance.api.dataclasses.pets.PetResponse
 import com.example.petcareavance.api.RetrofitClient
+import com.example.petcareavance.editPet
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -23,17 +26,22 @@ class PetFragment : Fragment() {
 
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?
+    ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_pet, container, false)
 
 
         val rvListPet= view.findViewById<RecyclerView>(R.id.rvListPet)
+
+        val transaction = requireFragmentManager()
+
         // Obtener User ID de SharedPreferences
         val sharedPreferences =
             requireActivity().getSharedPreferences("UserID", Context.MODE_PRIVATE)
-        val userId = sharedPreferences.getString("ID", "") ?: ""
+        val userId =  "12"//sharedPreferences.getString("ID", "") ?: ""
 
         // Obtener Token de SharedPreferences
         val sharedPreferences2 =
@@ -56,7 +64,7 @@ class PetFragment : Fragment() {
                 val gridLayoutManager = GridLayoutManager(requireContext(),2)
 
                 rvListPet.layoutManager = gridLayoutManager
-                rvListPet.adapter = PetAdapter(responseBody)
+                rvListPet.adapter = PetAdapter(responseBody,transaction)
             }
 
             override fun onFailure(call: Call<List<PetResponse>>, t: Throwable) {
@@ -67,15 +75,19 @@ class PetFragment : Fragment() {
         )
 
 
+
+
+
        return view
     }
 
-    class PetAdapter(private val petList: List<PetResponse>) : RecyclerView.Adapter<PetAdapter.PetViewHolder>() {
+    class PetAdapter(private val petList: List<PetResponse>, private val transaction:FragmentManager) : RecyclerView.Adapter<PetAdapter.PetViewHolder>() {
 
         class PetViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             val petName: Button = itemView.findViewById(R.id.btNamePet)
 
         }
+
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PetViewHolder {
             val view = LayoutInflater.from(parent.context).inflate(R.layout.item_pet, parent, false)
@@ -86,10 +98,27 @@ class PetFragment : Fragment() {
         override fun onBindViewHolder(holder: PetViewHolder, position: Int) {
             val pet = petList[position]
             holder.petName.text = pet.name
+            holder.petName.setOnClickListener(){
+
+                avanzarMascota()
+            }
 
         }
 
         override fun getItemCount() = petList.size
+
+
+        private fun avanzarMascota() {
+            val mascotaFragment = editPet()
+
+            val transaction = transaction.beginTransaction()
+            transaction.replace(R.id.fragment_container, mascotaFragment)
+            transaction.addToBackStack(null)
+            transaction.commit()
+        }
     }
+
+
+
 
 }

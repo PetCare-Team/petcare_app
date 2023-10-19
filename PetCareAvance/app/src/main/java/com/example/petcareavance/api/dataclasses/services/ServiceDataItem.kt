@@ -1,4 +1,4 @@
-package com.example.petcareavance
+package com.example.petcareavance.api.dataclasses.services
 
 //import com.google.gson.annotations.SerializedName
 

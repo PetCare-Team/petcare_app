@@ -16,6 +16,7 @@
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:text="example@gmail.com"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
@@ -28,6 +29,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintStart_toStartOf="parent"
+        android:text="root"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button

@@ -12,8 +12,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.petcareavance.Fragments.LogInFragment
 import com.example.petcareavance.Fragments.SignUpFragment
 import com.example.petcareavance.api.RetrofitClient
-import com.example.petcareavance.api.UserInfo
-import com.example.petcareavance.api.UserResponse
+import com.example.petcareavance.api.dataclasses.users.UserInfo
+import com.example.petcareavance.api.dataclasses.users.UserResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

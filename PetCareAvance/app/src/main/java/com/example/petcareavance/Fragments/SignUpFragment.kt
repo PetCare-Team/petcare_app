@@ -16,10 +16,10 @@ import androidx.fragment.app.Fragment
 import com.example.petcareavance.MenuActivity
 import com.example.petcareavance.R
 import com.example.petcareavance.api.RetrofitClient
-import com.example.petcareavance.api.UserInfo
-import com.example.petcareavance.api.UserResponse
-import com.example.petcareavance.api.UserResponseForSingUp
-import com.example.petcareavance.api.UserSignInInfo
+import com.example.petcareavance.api.dataclasses.users.UserInfo
+import com.example.petcareavance.api.dataclasses.users.UserResponse
+import com.example.petcareavance.api.dataclasses.users.UserResponseForSingUp
+import com.example.petcareavance.api.dataclasses.users.UserSignInInfo
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

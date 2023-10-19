@@ -1,5 +1,6 @@
 package com.example.petcareavance.api
 
+import com.example.petcareavance.api.services.ApiService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
