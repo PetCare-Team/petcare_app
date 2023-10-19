@@ -51,6 +51,12 @@ class   PerfilFragment : Fragment() {
 
         }
 
+
+        val buttontarjetas = view.findViewById<TextView>(R.id.textView9)
+        buttontarjetas.setOnClickListener{
+            editarMetodosDePago()
+        }
+
         // Obtener User ID de SharedPreferences
         val sharedPreferences = requireActivity().getSharedPreferences("UserID", Context.MODE_PRIVATE)
         val userId = sharedPreferences.getString("ID", "") ?: ""
@@ -103,6 +109,13 @@ class   PerfilFragment : Fragment() {
 
         transaction.replace(R.id.fragment_container, mascotaFragment)
 
+        transaction.addToBackStack(null)
+        transaction.commit()
+    }
+    private fun editarMetodosDePago() {
+        val fragmentmetodosdepago = MetodosDePagoFragment()
+        val transaction = requireFragmentManager().beginTransaction()
+        transaction.replace(R.id.fragment_container, fragmentmetodosdepago)
         transaction.addToBackStack(null)
         transaction.commit()
     }
