@@ -24,9 +24,8 @@ interface ApiService {
     @GET("api/v1/pet/{userId}/pet")
     fun getPetByUser(@Header("Authorization")
                      token: String,@Path("userId") userId: String): Call<List<PetResponse>>
-    @PUT("api/v1/{userId}")
-    fun updateUserInfo(@Header("Authorization")
-                     token: String,
+    @PUT("api/v1/users/{userId}")
+    fun updateUserInfo(@Header("Authorization") token: String,
                        @Path("userId") userId: String,
                        @Body userUpdate: UserUpdate): Call<UserUpdate>
     @GET("api/v1/users/{userId}")

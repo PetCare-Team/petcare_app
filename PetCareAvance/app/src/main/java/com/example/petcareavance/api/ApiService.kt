@@ -2,6 +2,7 @@ package com.example.petcareavance.api
 
 import com.example.petcareavance.api.dataclasses.pets.SavePetResource
 import com.example.petcareavance.api.dataclasses.users.UserResponse2
+import com.example.petcareavance.api.dataclasses.users.UserUpdate
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -16,9 +17,17 @@ interface ApiService {
     @POST("api/v1/users/sign-up")
     fun signUp(@Body userSignInInfo: UserSignInInfo): Call<UserResponseForSingUp>
 
+    @PUT("api/v1/users/{userId}")
+    fun updateUserInfo(
+        @Header("Authorization") token: String,
+        @Path("userId") userId: String,
+        @Body userUpdate: UserUpdate
+    ): Call<UserUpdate>
+
+
+
     fun getUserProfile(
-        @Header("Authorization")
-        token: String,
+        @Header("Authorization") token: String,
         @Path("userId") userId: String
     ): Call<UserResponse2>
     @GET("api/v1/pet/{userId}/pet")
