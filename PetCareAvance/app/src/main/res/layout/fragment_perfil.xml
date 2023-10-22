@@ -58,7 +58,7 @@
         app:srcCompat="@drawable/ic_leftkey_foreground" />
 
     <ImageView
-        android:id="@+id/imageView16"
+        android:id="@+id/ivLogOut"
         android:layout_width="51dp"
         android:layout_height="41dp"
         android:onClick="retroceder"

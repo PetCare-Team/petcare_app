@@ -4,6 +4,7 @@ import com.example.petcareavance.api.dataclasses.payment.AddPaymentResponse
 import com.example.petcareavance.api.dataclasses.payment.PaymentResponse
 import com.example.petcareavance.api.dataclasses.services.ServiceResponse
 import com.example.petcareavance.api.dataclasses.pets.PetResponse
+import com.example.petcareavance.api.dataclasses.pets.SavePetResource
 import com.example.petcareavance.api.dataclasses.users.UserInfo
 import com.example.petcareavance.api.dataclasses.users.UserResponse
 import com.example.petcareavance.api.dataclasses.users.UserResponse2
@@ -53,5 +54,9 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Path("userId") userId: String
     ): Call<List<PaymentResponse>>
+    @GET("api/v1/pet/{id}")
+    fun getPetById(@Path("id") id: Int): Call<PetResponse>
+    @PUT("api/v1/pet/{id}")
+    fun UpdatePet (@Path("id") id: Int ,@Body petInfo: SavePetResource): Call<SavePetResource>
 
 }
