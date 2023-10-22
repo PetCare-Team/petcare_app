@@ -88,7 +88,7 @@
         android:ems="10"
         android:inputType="textEmailAddress"
         android:paddingStart="16dp"
-        android:hint="MM/YY"
+        android:hint="MM/YYYY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.122"

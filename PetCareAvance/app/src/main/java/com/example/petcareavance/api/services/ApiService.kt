@@ -12,6 +12,7 @@ import com.example.petcareavance.api.dataclasses.users.UserSignInInfo
 import com.example.petcareavance.api.dataclasses.users.UserUpdate
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
@@ -42,6 +43,9 @@ interface ApiService {
     @POST("api/v1/payment")
     fun postPayment(@Body addPaymentResponse: AddPaymentResponse
     ): Call<AddPaymentResponse>
+
+    @DELETE("api/v1/payment/{id}")
+    fun deletePayment(@Path("id") id: String): Call<Void>
 
 
     @GET("api/v1/user/{userId}/payment")

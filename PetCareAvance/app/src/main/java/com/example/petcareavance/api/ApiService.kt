@@ -7,6 +7,7 @@ import com.example.petcareavance.api.dataclasses.users.UserResponse2
 import com.example.petcareavance.api.dataclasses.users.UserUpdate
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
@@ -32,6 +33,7 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Path("userId") userId: String
     ): Call<UserResponse2>
+
     @GET("api/v1/pet/{userId}/pet")
     fun getPetByUser(@Header("Authorization") token: String,
                      @Path("userId") userId: String): Call<List<PetResponse>>
@@ -44,6 +46,10 @@ interface ApiService {
 
     @POST("api/v1/payment")
     fun postPayment(@Body addPaymentResponse: AddPaymentResponse): Call<AddPaymentResponse>
+
+    @DELETE("api/v1/payment/{id}")
+    fun deletePayment(@Path("id") id: String): Call<Void>
+
 
     @GET("api/v1/pet/{id}")
     fun getPetById(@Path("id") id: String): Call<PetResponse>

@@ -60,6 +60,19 @@ class AgregarMetodoDePagoFragment :Fragment() {
         val numeroTarjeta = view?.findViewById<EditText>(R.id.tvNumeroTarjeta)?.text.toString()
 
 
+        val splitDate = expiracion.split("/")
+
+        // Asegurarse de que se obtuvieron 2 partes (mes y año)
+        if (splitDate.size == 2) {
+            val month = splitDate[0]
+            val year = splitDate[1]
+
+            expiracion = "$year-$month-19T20:35:43.764"
+        } else {
+            println("Formato de fecha incorrecto")
+        }
+
+
 
 
         val addPaymentResponse = AddPaymentResponse(
@@ -107,5 +120,6 @@ class AgregarMetodoDePagoFragment :Fragment() {
 
 
         })
+
     }
 }
