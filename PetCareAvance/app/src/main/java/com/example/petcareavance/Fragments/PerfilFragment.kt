@@ -2,6 +2,7 @@ package com.example.petcareavance.Fragments
 
 import android.util.Log
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.example.petcareavance.MainActivity
 import com.example.petcareavance.R
 import com.example.petcareavance.api.RetrofitClient
 import com.example.petcareavance.api.dataclasses.users.UserResponse2
@@ -17,8 +19,6 @@ import com.example.petcareavance.api.services.ApiService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 class   PerfilFragment : Fragment() {
 
@@ -48,6 +48,15 @@ class   PerfilFragment : Fragment() {
             avanzarMascota()
 
         }
+
+        val imlogout= view.findViewById<ImageView>(R.id.ivLogOut)
+
+        imlogout.setOnClickListener{
+
+            logout()
+
+        }
+
 
         // Obtener User ID de SharedPreferences
         val sharedPreferences = requireActivity().getSharedPreferences("UserID", Context.MODE_PRIVATE)
@@ -104,6 +113,13 @@ class   PerfilFragment : Fragment() {
         transaction.addToBackStack(null)
         transaction.commit()
     }
+
+    private fun logout() {
+        val intent = Intent(activity, MainActivity::class.java)
+        startActivity(intent)
+    }
+
+
 
 
 
