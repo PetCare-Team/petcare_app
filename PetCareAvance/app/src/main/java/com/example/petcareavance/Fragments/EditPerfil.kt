@@ -127,19 +127,27 @@ class EditPerfil : Fragment() {
         apiService = retrofit.create(ApiService::class.java)
 
 
-        val call = apiService.updateUserInfo("Bearer $token", userId, userUpdate)
-        call.enqueue(object : Callback<UserUpdate> {
+        val call2 = apiService.updateUserInfo("Bearer $token", userId, userUpdate)
+
+        call2.enqueue(object : Callback<UserUpdate> {
             override fun onResponse(call: Call<UserUpdate>, response: Response<UserUpdate>) {
                 if (response.isSuccessful) {
                     // La actualización fue exitosa
                     Toast.makeText(requireContext(), "Perfil actualizado exitosamente", Toast.LENGTH_LONG).show()
                 } else {
+                    Log.d("ERRRRRRRRRRROR", "HTTP Status Code: ${response.code()}")
+                    Log.d("HTTP Response", "Response: $response")
+
+                    Log.e("ERRRRRRRRRRROR", "Error updating profile: ${response.errorBody()?.string()}")
+
                     // Hubo un error en la actualización
                     Toast.makeText(requireContext(), "Error en la actualización: ${response.errorBody()?.string()}", Toast.LENGTH_LONG).show()
                 }
             }
 
             override fun onFailure(call: Call<UserUpdate>, t: Throwable) {
+                Log.e("ERRRRRRRRRRROR", "Error updating profile: ${t.localizedMessage}")
+
                 // Manejar el error
                 Toast.makeText(requireContext(), "Error: ${t.localizedMessage}", Toast.LENGTH_LONG).show()
             }
