@@ -1,6 +1,7 @@
 package com.example.petcareavance.Fragments
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.GridLayoutManager
@@ -37,6 +39,8 @@ class PetFragment : Fragment() {
         val rvListPet= view.findViewById<RecyclerView>(R.id.rvListPet)
 
         val transaction = requireFragmentManager()
+
+
 
         // Obtener User ID de SharedPreferences
         val sharedPreferences =
@@ -100,7 +104,7 @@ class PetFragment : Fragment() {
             holder.petName.text = pet.name
             holder.petName.setOnClickListener(){
 
-                avanzarMascota()
+                avanzarMascota(pet.id)
             }
 
         }
@@ -108,8 +112,12 @@ class PetFragment : Fragment() {
         override fun getItemCount() = petList.size
 
 
-        private fun avanzarMascota() {
+        private fun avanzarMascota(petId: Int) {
             val mascotaFragment = editPet()
+            val bundle = Bundle()
+            bundle.putInt(editPet.ARG_PERRO_ID, petId)
+
+            mascotaFragment.arguments = bundle
 
             val transaction = transaction.beginTransaction()
             transaction.replace(R.id.fragment_container, mascotaFragment)

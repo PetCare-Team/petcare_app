@@ -14,9 +14,9 @@
         android:layout_marginTop="240dp"
         android:hint="@string/email"
         android:inputType="textEmailAddress"
+        android:text="p05@gmail.com"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:text="example@gmail.com"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
@@ -26,10 +26,10 @@
         android:layout_marginTop="304dp"
         android:hint="@string/contrasena"
         android:inputType="textPassword"
+        android:text="321"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintStart_toStartOf="parent"
-        android:text="root"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button

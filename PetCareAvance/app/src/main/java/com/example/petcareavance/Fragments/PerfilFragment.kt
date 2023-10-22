@@ -11,6 +11,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.petcareavance.R
+import com.example.petcareavance.api.RetrofitClient
 import com.example.petcareavance.api.dataclasses.users.UserResponse2
 import com.example.petcareavance.api.services.ApiService
 import retrofit2.Call
@@ -30,12 +31,9 @@ class   PerfilFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_perfil, container, false)
 
         // Inicializar Retrofit
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://petcarebackend.azurewebsites.net/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
+        val apiService = RetrofitClient.instance
 
-        apiService = retrofit.create(ApiService::class.java)
+
 
         val btnAvanzar = view.findViewById<TextView>(R.id.textView3)
 
