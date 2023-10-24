@@ -41,6 +41,12 @@ class   PerfilFragment : Fragment() {
             avanzar()
         }
 
+        val imFavorites = view.findViewById<ImageView>(R.id.ivFavorites)
+
+        imFavorites.setOnClickListener {
+            avanzarFavoritos()
+        }
+
         val imMascotas= view.findViewById<ImageView>(R.id.ivMascotas)
 
         imMascotas.setOnClickListener{
@@ -122,6 +128,16 @@ class   PerfilFragment : Fragment() {
         val fragmentmetodosdepago = MetodosDePagoFragment()
         val transaction = requireFragmentManager().beginTransaction()
         transaction.replace(R.id.fragment_container, fragmentmetodosdepago)
+        transaction.addToBackStack(null)
+        transaction.commit()
+    }
+
+    private fun avanzarFavoritos() {
+        val favoritosFragment = FavoritesFragment()
+        val transaction = requireFragmentManager().beginTransaction()
+
+        transaction.replace(R.id.fragment_container, favoritosFragment)
+
         transaction.addToBackStack(null)
         transaction.commit()
     }
