@@ -122,6 +122,10 @@ class RecycleViewFragment : Fragment() {
             holder.starIcon.setOnClickListener {
                 it.isSelected = !it.isSelected
                 if (it.isSelected) {
+
+                    // Cambiar imagen a estrella encendida
+                    holder.starIcon.setImageResource(android.R.drawable.btn_star_big_on)
+
                     // Guardar en la base de datos
                     CoroutineScope(Dispatchers.IO).launch {
                         val userResponse = serviceroom(
