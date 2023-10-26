@@ -3,6 +3,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
@@ -10,6 +11,13 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.petcareavance.R
+import com.example.petcareavance.room.AppDatabase
+import com.example.petcareavance.room.serviceroom
+import com.example.petcareavance.views.User
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -33,14 +41,6 @@ class RecycleViewFragment : Fragment() {
         val dni: Int,
         val cuidador: Boolean,
         val user: User,
-    )
-
-    data class User(val id:Int,
-                    val firstName: String,
-                    val lastName:String,
-                    val phone:Int,
-                    val dni: Int,
-                    val mail: String,
     )
 
     override fun onCreateView(
@@ -105,6 +105,7 @@ class RecycleViewFragment : Fragment() {
             val userName: TextView = itemView.findViewById(R.id.userName)
             val userIdAsPrice: TextView = itemView.findViewById(R.id.userIdAsPrice)
             val userAddress: TextView = itemView.findViewById(R.id.userAddress)
+            val starIcon: ImageView = itemView.findViewById(R.id.starIcon)
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
@@ -117,6 +118,33 @@ class RecycleViewFragment : Fragment() {
             holder.userName.text = user.user.firstName + " " +  user.user.lastName
             holder.userIdAsPrice.text = "S/. " + user.price.toString()
             holder.userAddress.text = user.location
+
+            holder.starIcon.setOnClickListener {
+                it.isSelected = !it.isSelected
+                if (it.isSelected) {
+
+                    // Cambiar imagen a estrella encendida
+                    holder.starIcon.setImageResource(android.R.drawable.btn_star_big_on)
+
+                    // Guardar en la base de datos
+                    CoroutineScope(Dispatchers.IO).launch {
+                        val userResponse = serviceroom(
+                            serviceId = user.serviceId,
+                            price = user.price,
+                            description = user.description,
+                            location = user.location,
+                            phone = user.phone,
+                            dni = user.dni,
+                            cuidador = user.cuidador,
+                            user = user.user
+                        )
+                        AppDatabase.getDatabase(holder.itemView.context).userResponseDao().insert(userResponse)
+                        withContext(Dispatchers.Main) {
+                            Toast.makeText(holder.itemView.context, "Servicio añadido a favoritos", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+            }
         }
 
         override fun getItemCount() = userList.size

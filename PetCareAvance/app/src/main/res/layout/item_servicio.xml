@@ -8,9 +8,8 @@
 
     <LinearLayout
         android:id="@+id/item_service"
-        android:layout_width="334dp"
-        android:layout_height="115dp"
-        android:layout_marginTop="36dp"
+        android:layout_width="364dp"
+        android:layout_height="110dp"
         android:background="@drawable/service_background"
         android:gravity="center"
         android:orientation="vertical"
@@ -42,7 +41,7 @@
                 <TextView
                     android:id="@+id/userName"
                     android:layout_width="match_parent"
-                    android:layout_height="57dp"
+                    android:layout_height="61dp"
                     android:layout_weight="2"
                     android:gravity="center|start"
                     android:textSize="20sp" />
@@ -56,11 +55,21 @@
 
             <TextView
                 android:id="@+id/userIdAsPrice"
-                android:layout_width="6dp"
-                android:layout_height="54dp"
+                android:layout_width="wrap_content"
+                android:layout_height="52dp"
                 android:layout_weight="1"
                 android:gravity="start|center_vertical"
                 android:textSize="20sp" />
+
+            <ImageView
+                android:id="@+id/starIcon"
+                android:layout_width="44dp"
+                android:layout_height="58dp"
+                android:layout_gravity="center"
+                android:layout_marginEnd="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@android:drawable/btn_star_big_off" />
 
         </LinearLayout>
     </LinearLayout>
