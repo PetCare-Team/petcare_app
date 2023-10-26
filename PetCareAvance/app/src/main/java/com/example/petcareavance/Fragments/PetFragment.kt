@@ -45,7 +45,7 @@ class PetFragment : Fragment() {
         // Obtener User ID de SharedPreferences
         val sharedPreferences =
             requireActivity().getSharedPreferences("UserID", Context.MODE_PRIVATE)
-        val userId =  "12"//sharedPreferences.getString("ID", "") ?: ""
+        val userId =  sharedPreferences.getString("ID", "") ?: ""
 
         // Obtener Token de SharedPreferences
         val sharedPreferences2 =

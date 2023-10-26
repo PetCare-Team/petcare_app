@@ -3,6 +3,7 @@ package com.example.petcareavance.api
 import com.example.petcareavance.api.dataclasses.payment.AddPaymentResponse
 import com.example.petcareavance.api.dataclasses.payment.PaymentResponse
 import com.example.petcareavance.api.dataclasses.pets.SavePetResource
+import com.example.petcareavance.api.dataclasses.reservas.ReservaResponse
 import com.example.petcareavance.api.dataclasses.users.UserResponse2
 import com.example.petcareavance.api.dataclasses.users.UserUpdate
 import retrofit2.Call
@@ -56,6 +57,11 @@ interface ApiService {
     @PUT("api/v1/pet/{id}")
     fun updatePet (@Path("id") id: String ,@Body petInfo: SavePetResource): Call<com.example.petcareavance.api.dataclasses.pets.PetResponse>
 
+    @GET("api/v1/reserva/byservice/{serviceId}")
+    fun getReservaByPaymentId(@Path("serviceId") userId: String): Call<List<ReservaResponse>>
+
+    @GET("api/v1/reserva/{reservaId}")
+    fun getReservaById(@Path("reservaId") userId: String): Call<ReservaResponse>
 
 }
 

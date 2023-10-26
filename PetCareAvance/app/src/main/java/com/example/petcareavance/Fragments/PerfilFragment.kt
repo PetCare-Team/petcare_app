@@ -49,6 +49,11 @@ class   PerfilFragment : Fragment() {
 
         }
 
+        val imServices=view.findViewById<ImageView>(R.id.ivServices)
+        imServices.setOnClickListener{
+            avanzarServices()
+        }
+
 
         val buttontarjetas = view.findViewById<TextView>(R.id.textView9)
         buttontarjetas.setOnClickListener{
@@ -118,6 +123,17 @@ class   PerfilFragment : Fragment() {
         transaction.addToBackStack(null)
         transaction.commit()
     }
+
+    fun avanzarServices() {
+        val serviciosFragment = ServicesDataFragment() // Supongamos que este es el fragmento de servicios que deseas mostrar
+        val transaction = requireFragmentManager().beginTransaction()
+
+        transaction.replace(R.id.fragment_container, serviciosFragment)
+
+        transaction.addToBackStack(null)
+        transaction.commit()
+    }
+
     private fun editarMetodosDePago() {
         val fragmentmetodosdepago = MetodosDePagoFragment()
         val transaction = requireFragmentManager().beginTransaction()
