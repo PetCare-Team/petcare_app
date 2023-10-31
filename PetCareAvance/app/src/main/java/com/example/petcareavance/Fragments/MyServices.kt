@@ -35,6 +35,19 @@ class MyServices : Fragment(){
 
         val myParam: Int? = arguments?.getInt(ARG_PARAM)
 
+
+        val btnAvanzar = view.findViewById<ImageButton>(R.id.imageButton3)
+
+
+        btnAvanzar.setOnClickListener {
+            avanzarRating()
+        }
+
+        btnretroceder.setOnClickListener {
+            retroceder()
+        }
+
+
         Log.d("myParam","$myParam")
 
         val call = RetrofitClient.instance.getReservaById(myParam.toString()) //////////////
@@ -121,6 +134,15 @@ class MyServices : Fragment(){
         val formatter = DateTimeFormatter.ofPattern("dd/MM")
         return dateTime.format(formatter)
     }
+
+    fun avanzarRating(){
+        val serviceInfo = Rating()
+        val transaction = requireFragmentManager().beginTransaction()
+        transaction.replace(R.id.fragment_container, serviceInfo)
+        transaction.addToBackStack(null)
+        transaction.commit()
+    }
+
     companion object {
         private const val ARG_PARAM = "some_param"
 
