@@ -25,32 +25,144 @@ import java.time.format.DateTimeFormatter
 
 class MyServices : Fragment(){
 
+    private var reservaDataItem: ReservaResponse? = null
+
+
     override  fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
         val view = inflater.inflate(R.layout.fragment_myservices, container, false)
         val btnretroceder = view.findViewById<ImageView>(R.id.imageView20)
+        return view
+
+//        val view = inflater.inflate(R.layout.fragment_myservices, container, false)
+//        val btnretroceder = view.findViewById<ImageView>(R.id.imageView20)
+//
+//
+//        val myParam: Int? = arguments?.getInt(ARG_PARAM)
+//        Log.d("IMPORTANE2222:" , "$myParam")
+//
+//        val btnAvanzar = view.findViewById<ImageButton>(R.id.imageButton3)
+//
+//
+//
+//
+//        btnretroceder.setOnClickListener {
+//            retroceder()
+//        }
+//
+//
+//        Log.d("myParam","$myParam")
+//
+//        val call = RetrofitClient.instance.getReservaById(myParam.toString()) //////////////
+//
+//        call.enqueue(object : Callback<ReservaResponse> {
+//            @SuppressLint("SetTextI18n")
+//            override fun onResponse(
+//                call: Call<ReservaResponse>,
+//                response: Response<ReservaResponse>
+//            ) {
+//                reservaDataItem = response.body()
+//
+//                Log.d("API_Response", "Received service data: ${reservaDataItem}")
+//
+//
+//
+//                if (reservaDataItem != null) {
+//                    Toast.makeText(requireContext(), "Nombre del servicio: ${reservaDataItem}", Toast.LENGTH_LONG).show()
+//
+//                    val direccion: TextView = view.findViewById(R.id.textView37)
+//                    val hora: TextView = view.findViewById(R.id.textView38)
+//                    val nroTarjeta: TextView = view.findViewById(R.id.textView21)
+//                    val costo: TextView = view.findViewById(R.id.textView40)
+//                    val adicionales: TextView = view.findViewById(R.id.textView41)
+//                    val cuotaPetcare: TextView = view.findViewById(R.id.textView42)
+//                    val totalPagado: TextView = view.findViewById(R.id.textView43)
+//                    val nombreGrande: TextView = view.findViewById(R.id.textView32)
+//                    val nombrePequeno: TextView = view.findViewById(R.id.textView29)
+//
+//
+//
+//                    direccion.text = reservaDataItem!!.serviceProvider.location
+//                    hora.text = formatStartHour(reservaDataItem!!.startHour)  // convertir
+//
+//                    val number = reservaDataItem!!.clientPayment.number
+//                    val lastFourDigits = if (number.length >= 4) {
+//                        number.takeLast(4)
+//                    } else {
+//                        number
+//                    }
+//
+//                    nroTarjeta.text = "*$lastFourDigits" // ultimos 4 digitos
+//
+//                    costo.text = "S/"+ reservaDataItem!!.serviceProvider.price.toString()+".00"
+//                    adicionales.text = "S/0.00"
+//                    val cuota = reservaDataItem!!.serviceProvider.price*0.20
+//                    cuotaPetcare.text = "S/$cuota"+"0"
+//                    val totalSuma = reservaDataItem!!.serviceProvider.price*1.20
+//                    totalPagado.text = "S/$totalSuma"+"0"
+//                    nombreGrande.text = reservaDataItem!!.serviceProvider.user.firstName
+//                    nombrePequeno.text = reservaDataItem!!.serviceProvider.user.firstName
+//
+//
+//                } else {
+//                    Toast.makeText(requireContext(), "No se pudo obtener el servicio", Toast.LENGTH_LONG).show()
+//                }
+//            }
+//
+//
+//
+//            override fun onFailure(call: Call<ReservaResponse>, t: Throwable) {
+//                Log.d("asd","${t.message}")
+//
+//                Toast.makeText(requireContext(), "Error: ${t.message}", Toast.LENGTH_LONG).show()
+//            }
+//        })
+//
+//        btnretroceder.setOnClickListener {
+//            retroceder()
+//        }
+//
+//        btnAvanzar.setOnClickListener {
+//            val myParam = reservaDataItem?.serviceProvider?.serviceId
+//            avanzarRating(myParam?:0)
+//
+//
+//        }
+//        return view
+}
 
 
-        val myParam: Int? = arguments?.getInt(ARG_PARAM)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-
+        val btnretroceder = view.findViewById<ImageView>(R.id.imageView20)
         val btnAvanzar = view.findViewById<ImageButton>(R.id.imageButton3)
-
-
-        btnAvanzar.setOnClickListener {
-            avanzarRating()
-        }
 
         btnretroceder.setOnClickListener {
             retroceder()
         }
 
+        btnAvanzar.setOnClickListener {
+            val myParam = reservaDataItem?.serviceProvider?.serviceId
+            avanzarRating(myParam ?: 0)
+        }
+    }
 
-        Log.d("myParam","$myParam")
+    override fun onResume() {
+        super.onResume()
 
-        val call = RetrofitClient.instance.getReservaById(myParam.toString()) //////////////
+        val myParam: Int? = arguments?.getInt(ARG_PARAM)
+        Log.d("IMPORTANE2222:", "$myParam")
+
+        if (myParam != null) {
+            fetchReservaData(myParam.toString())
+        }
+    }
+
+    private fun fetchReservaData(reservaId: String) {
+        val call = RetrofitClient.instance.getReservaById(reservaId)
 
         call.enqueue(object : Callback<ReservaResponse> {
             @SuppressLint("SetTextI18n")
@@ -58,11 +170,8 @@ class MyServices : Fragment(){
                 call: Call<ReservaResponse>,
                 response: Response<ReservaResponse>
             ) {
-                val reservaDataItem = response.body()
-
-                Log.d("API_Response", "Received service data: ${reservaDataItem}")
-
-
+                reservaDataItem = response.body()
+                val view = view ?: return
 
                 if (reservaDataItem != null) {
                     Toast.makeText(requireContext(), "Nombre del servicio: ${reservaDataItem}", Toast.LENGTH_LONG).show()
@@ -77,12 +186,10 @@ class MyServices : Fragment(){
                     val nombreGrande: TextView = view.findViewById(R.id.textView32)
                     val nombrePequeno: TextView = view.findViewById(R.id.textView29)
 
+                    direccion.text = reservaDataItem!!.serviceProvider.location
+                    hora.text = formatStartHour(reservaDataItem!!.startHour)  // convertir
 
-
-                    direccion.text = reservaDataItem.serviceProvider.location
-                    hora.text = formatStartHour(reservaDataItem.startHour)  // convertir
-
-                    val number = reservaDataItem.clientPayment.number
+                    val number = reservaDataItem!!.clientPayment.number
                     val lastFourDigits = if (number.length >= 4) {
                         number.takeLast(4)
                     } else {
@@ -91,41 +198,28 @@ class MyServices : Fragment(){
 
                     nroTarjeta.text = "*$lastFourDigits" // ultimos 4 digitos
 
-                    costo.text = "S/"+reservaDataItem.serviceProvider.price.toString()+".00"
+                    costo.text = "S/"+reservaDataItem!!.serviceProvider.price.toString()+".00"
                     adicionales.text = "S/0.00"
-                    val cuota = reservaDataItem.serviceProvider.price*0.20
+                    val cuota = reservaDataItem!!.serviceProvider.price*0.20
                     cuotaPetcare.text = "S/$cuota"+"0"
-                    val totalSuma = reservaDataItem.serviceProvider.price*1.20
+                    val totalSuma = reservaDataItem!!.serviceProvider.price*1.20
                     totalPagado.text = "S/$totalSuma"+"0"
-                    nombreGrande.text = reservaDataItem.serviceProvider.user.firstName
-                    nombrePequeno.text = reservaDataItem.serviceProvider.user.firstName
+                    nombreGrande.text = reservaDataItem!!.serviceProvider.user.firstName
+                    nombrePequeno.text = reservaDataItem!!.serviceProvider.user.firstName
 
-
-
-//                    textView37 - direccion
-//                    textView38 - inicio hora
-//                    textView21 - nro tarjeta
-//                    textView40 -costo
-//                    textView32, textView29 - nombre provider
                 } else {
                     Toast.makeText(requireContext(), "No se pudo obtener el servicio", Toast.LENGTH_LONG).show()
                 }
             }
 
-
-
             override fun onFailure(call: Call<ReservaResponse>, t: Throwable) {
-                Log.d("asd","${t.message}")
-
+                Log.d("asd", "${t.message}")
                 Toast.makeText(requireContext(), "Error: ${t.message}", Toast.LENGTH_LONG).show()
             }
         })
+    }
 
-        btnretroceder.setOnClickListener {
-            retroceder()
-        }
-        return view
-}
+
     fun formatStartHour(startHour: String): String {
         // Paso 1: Parsear la cadena a LocalDateTime
         val dateTime = LocalDateTime.parse(startHour, DateTimeFormatter.ISO_LOCAL_DATE_TIME)
@@ -135,13 +229,18 @@ class MyServices : Fragment(){
         return dateTime.format(formatter)
     }
 
-    fun avanzarRating(){
-        val serviceInfo = Rating()
+    fun avanzarRating(myParam:Int){
+        val serviceInfo = Rating().apply {
+            arguments = Bundle().apply {
+                putInt("myParamKey",  myParam)
+            }
+        }
         val transaction = requireFragmentManager().beginTransaction()
         transaction.replace(R.id.fragment_container, serviceInfo)
         transaction.addToBackStack(null)
         transaction.commit()
     }
+
 
     companion object {
         private const val ARG_PARAM = "some_param"

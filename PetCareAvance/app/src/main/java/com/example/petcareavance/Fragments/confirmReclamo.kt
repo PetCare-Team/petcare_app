@@ -29,10 +29,12 @@ class confirmReclamo: Fragment() {
 
 
     private fun retroceder(){
-        val serviceInfo = Rating()
-        val transaction = requireFragmentManager().beginTransaction()
-        transaction.replace(R.id.fragment_container, serviceInfo)
-        transaction.addToBackStack(null)
-        transaction.commit()
+        parentFragmentManager.popBackStack()
+
+//        val serviceInfo = Rating()
+//        val transaction = requireFragmentManager().beginTransaction()
+//        transaction.replace(R.id.fragment_container, serviceInfo)
+//        transaction.addToBackStack(null)
+//        transaction.commit()
     }
 }

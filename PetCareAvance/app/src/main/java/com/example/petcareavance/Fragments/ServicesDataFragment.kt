@@ -169,6 +169,7 @@ class ServicesDataFragment : Fragment() {
 
             holder.serviceStatus.text =  getStatus(reserva.estadoId) + "   " + formatStartHour(reserva.startHour)
             holder.serviceName.setOnClickListener {
+                Log.d("IMPORTANTE:", "Valoir del id reserva ${reserva.id}")
                 avanzarUsuario(reserva.id)
             }
         }

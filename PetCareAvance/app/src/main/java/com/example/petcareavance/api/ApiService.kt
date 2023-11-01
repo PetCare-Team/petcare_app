@@ -4,6 +4,7 @@ import com.example.petcareavance.api.dataclasses.payment.AddPaymentResponse
 import com.example.petcareavance.api.dataclasses.payment.PaymentResponse
 import com.example.petcareavance.api.dataclasses.pets.SavePetResource
 import com.example.petcareavance.api.dataclasses.reservas.ReservaResponse
+import com.example.petcareavance.api.dataclasses.review.ReviewResponse
 import com.example.petcareavance.api.dataclasses.users.UserResponse2
 import com.example.petcareavance.api.dataclasses.users.UserUpdate
 import retrofit2.Call
@@ -62,6 +63,10 @@ interface ApiService {
 
     @GET("api/v1/reserva/{reservaId}")
     fun getReservaById(@Path("reservaId") userId: String): Call<ReservaResponse>
+
+
+    @POST("api/v1/reviews")
+    fun postReview(@Body reviewResponse: ReviewResponse): Call<ReviewResponse>
 
 }
 

@@ -59,7 +59,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="44dp"
         android:layout_marginTop="104dp"
-        android:text="¿Como calificarias el servicio de  ?"
+        android:text="¿Como calificarias el servicio ?"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
