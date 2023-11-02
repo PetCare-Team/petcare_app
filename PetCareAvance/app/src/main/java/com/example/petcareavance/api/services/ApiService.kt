@@ -6,7 +6,9 @@ import com.example.petcareavance.api.dataclasses.services.ServiceResponse
 import com.example.petcareavance.api.dataclasses.pets.PetResponse
 import com.example.petcareavance.api.dataclasses.pets.SavePetResource
 import com.example.petcareavance.api.dataclasses.reservas.ReservaResponse
+import com.example.petcareavance.api.dataclasses.review.ReviewResource
 import com.example.petcareavance.api.dataclasses.review.ReviewResponse
+import com.example.petcareavance.api.dataclasses.review.SaveReviewResource
 import com.example.petcareavance.api.dataclasses.users.UserInfo
 import com.example.petcareavance.api.dataclasses.users.UserResponse
 import com.example.petcareavance.api.dataclasses.users.UserResponse2
@@ -70,5 +72,11 @@ interface ApiService {
     fun getReservaById(@Path("reservaId") userId: String): Call<ReservaResponse>
 
     @POST("api/v1/reviews")
-    fun postReview(@Body reviewResponse: ReviewResponse): Call<ReviewResponse>
+    fun postReview(@Body reviewResponse: ReviewResource): Call<ReviewResponse>
+
+    @GET("api/v1/reviews/byuser/{userId}")
+    fun getReview(@Header("Authorization") token: String, @Path("userId") userId: String ): Call<List<ReviewResponse>>
+
+    @PUT("api/v1/reviews/{id}")
+    fun UpdateReview (@Path("id") id: Int ,@Body petInfo: SaveReviewResource): Call<SaveReviewResource>
 }
