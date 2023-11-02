@@ -74,24 +74,9 @@ class Rating: Fragment() {
                         for(review in reviewResponse) {
                             if (review.serviceId == myParam) {
 
-                            //    val ratingBar = view.findViewById<RatingBar>(R.id.ratingBar)
-                              //  val stars = ratingBar.progressDrawable as LayerDrawable
-//
-  //                              for (i in 0 until 5) {
-    //                                val star = stars.getDrawable(i)
-      //                              if (i < review.stars) {
-        //                                // Cambia el color de las primeras tres estrellas
-          //                              star.setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP)
-            //                        } else {
-              //                          // Deja el color de las últimas dos estrellas como el valor predeterminado
-                //                        star.clearColorFilter()
-                              //      }
-                  //              }
-//
-  //                              ratingBar.rating = review.stars.toFloat()  // Establece la calificación deseada
 
                                 // Actualizar las vistas con los datos obtenidos
-                                view.findViewById<RatingBar>(R.id.ratingBar).numStars= review.stars
+                                view.findViewById<RatingBar>(R.id.ratingBar).rating = review.stars.toFloat()
                                 view.findViewById<EditText>(R.id.tmDescription3)
                                     .setText(review.description)
                                 ratingId=review.reviewId
@@ -158,6 +143,7 @@ class Rating: Fragment() {
             stars= Starts
 
         )
+        Log.d("reviewUpdate", "${reviewUpdate.stars}")
         // Inicializar Retrofit
         val retrofit = Retrofit.Builder()
             .baseUrl("https://petcarebackend.azurewebsites.net/")
