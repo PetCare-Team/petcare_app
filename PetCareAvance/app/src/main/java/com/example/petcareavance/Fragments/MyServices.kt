@@ -6,17 +6,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
 import com.example.petcareavance.R
 import com.example.petcareavance.api.RetrofitClient
 import com.example.petcareavance.api.dataclasses.reservas.ReservaResponse
-import com.example.petcareavance.api.dataclasses.services.ServiceResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -176,8 +173,8 @@ class MyServices : Fragment(){
                 if (reservaDataItem != null) {
                     Toast.makeText(requireContext(), "Nombre del servicio: ${reservaDataItem}", Toast.LENGTH_LONG).show()
 
-                    val direccion: TextView = view.findViewById(R.id.textView37)
-                    val hora: TextView = view.findViewById(R.id.textView38)
+                    val direccion: TextView = view.findViewById(R.id.servicelocation)
+                    val hora: TextView = view.findViewById(R.id.servicedni)
                     val nroTarjeta: TextView = view.findViewById(R.id.textView21)
                     val costo: TextView = view.findViewById(R.id.textView40)
                     val adicionales: TextView = view.findViewById(R.id.textView41)

@@ -7,7 +7,7 @@
     tools:context="Fragments.MyServices">
 
     <TextView
-        android:id="@+id/textView39"
+        android:id="@+id/serviceprice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
@@ -211,7 +211,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView31" />
 
     <TextView
-        android:id="@+id/textView37"
+        android:id="@+id/servicelocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="108dp"
@@ -220,7 +220,7 @@
         android:text="Buena aventura 123 "
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView36" />
+        app:layout_constraintTop_toBottomOf="@+id/ervicelocation" />
 
     <TextView
         android:id="@+id/textView25"
@@ -233,7 +233,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.179"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView38" />
+        app:layout_constraintTop_toTopOf="@+id/servicedni" />
 
     <TextView
         android:id="@+id/textView35"
@@ -248,7 +248,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView26" />
 
     <TextView
-        android:id="@+id/textView38"
+        android:id="@+id/servicedni"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="108dp"
@@ -257,7 +257,7 @@
         android:text="Bobby"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView37" />
+        app:layout_constraintTop_toBottomOf="@+id/servicelocation" />
 
     <TextView
         android:id="@+id/textView30"
@@ -283,7 +283,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView30" />
 
     <TextView
-        android:id="@+id/textView36"
+        android:id="@+id/ervicelocation"
         android:layout_width="47dp"
         android:layout_height="19dp"
         android:layout_marginTop="40dp"
@@ -338,7 +338,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:src="@drawable/location"
-        app:layout_constraintEnd_toStartOf="@+id/textView37"
+        app:layout_constraintEnd_toStartOf="@+id/servicelocation"
         app:layout_constraintTop_toBottomOf="@+id/imageView22" />
 
     <ImageView
@@ -348,7 +348,7 @@
         android:layout_marginTop="12dp"
         android:layout_marginEnd="14dp"
         android:src="@drawable/boby"
-        app:layout_constraintEnd_toStartOf="@+id/textView36"
+        app:layout_constraintEnd_toStartOf="@+id/ervicelocation"
         app:layout_constraintTop_toBottomOf="@+id/textView35" />
 
     <ImageView
@@ -358,7 +358,7 @@
         android:layout_marginTop="12dp"
         android:layout_marginEnd="16dp"
         android:src="@drawable/clock"
-        app:layout_constraintEnd_toStartOf="@+id/textView38"
+        app:layout_constraintEnd_toStartOf="@+id/servicedni"
         app:layout_constraintTop_toBottomOf="@+id/imageView13" />
 
     <ImageView
