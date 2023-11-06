@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.fragment.app.FragmentManager
 import com.example.petcareavance.R
 import com.example.petcareavance.api.RetrofitClient
 import com.example.petcareavance.api.dataclasses.review.ReviewResponse
@@ -28,29 +29,42 @@ class AnyServiceFragment: Fragment() {
     private lateinit var reviewsList: RecyclerView
 
 
+    val ARG_SERVICE_ID: String = "0"
+
+
+    companion object {
+        const val ARG_SERVICE_ID = "serviceId"
+    }
+
     override  fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
         val view = inflater.inflate(R.layout.fragment_anyservice, container, false)
 
-
+        val transaction = requireFragmentManager()
         val btnRetroceder = view.findViewById<ImageView>(R.id.imageView20)
 
         btnRetroceder.setOnClickListener {
             retroceder()
         }
 
-        // Inicializa tu RecyclerView y establece el adaptador
-//        reviewsList = view.findViewById(R.id.reviews_recycler_view) // Asegúrate de que tienes un RecyclerView en tu layout con este ID
-//        reviewsList.layoutManager = LinearLayoutManager(context)
-//        reviewAdapter = ReviewAdapter()
-//        reviewsList.adapter = reviewAdapter
+
 
         reviewAdapter = ReviewAdapter() // Inicialización correcta del adaptador.
         val reviewsRecyclerView: RecyclerView = view.findViewById(R.id.reviews_recycler_view)
         reviewsRecyclerView.layoutManager = LinearLayoutManager(context)
         reviewsRecyclerView.adapter = reviewAdapter
+        val btnServiceConfirm = view.findViewById<Button>(R.id.btnreservarservice)
+
+        btnServiceConfirm.setOnClickListener{
+
+            avanzarServicio(ARG_SERVICE_ID,transaction)
+
+        }
+
+         var serviceDataItem: ServiceResponse? = null
+
 
 
         reviewsRecyclerView.adapter = reviewAdapter
@@ -63,9 +77,17 @@ class AnyServiceFragment: Fragment() {
             return view // Salir de la función si no hay ID válido.
         }
         loadReviews(serviceId.toString()) // Llama a este método para cargar las reseñas.
+        val servicelocation: TextView = view.findViewById(R.id.servicelocation)
+        val servicename: TextView = view.findViewById(R.id.servicename)
+        val servicedni: TextView = view.findViewById(R.id.servicedni)
+        val servicedescription: TextView = view.findViewById(R.id.servicedescription)
+        var servicenameBig: TextView = view.findViewById(R.id.textView36)
+       // val serviceprice: TextView = view.findViewById(R.id.tvServicePrice)
+
+
 
         if (serviceId == -1) {
-            Toast.makeText(requireContext(), "ID del servicio no encontrado", Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), "ID del servicio no encontrado", Toast.LENGTH_LONG).show()
             // Manejar la situación cuando el ID no está presente, tal vez retroceder o mostrar un mensaje.
         } else {
             // Aquí usas el ID para hacer la llamada a la API
@@ -74,7 +96,6 @@ class AnyServiceFragment: Fragment() {
         }
 
 
-        var serviceDataItem: ServiceResponse? = null
 
 
         if (call != null) {
@@ -84,6 +105,7 @@ class AnyServiceFragment: Fragment() {
                     call: Call<ServiceResponse>,
                     response: Response<ServiceResponse>
                 ) {
+                    Log.d("TESTTTTT", "$serviceDataItem")
                     serviceDataItem = response.body()
                     val view = view ?: return
 
@@ -95,8 +117,10 @@ class AnyServiceFragment: Fragment() {
                         val servicedni: TextView = view.findViewById(R.id.servicedni)
                         val servicedescription: TextView = view.findViewById(R.id.servicedescription)
                         val serviceprice: TextView = view.findViewById(R.id.serviceprice)
+                        var servicenameBig: TextView = view.findViewById(R.id.textView36)
 
-                        servicename.text = "AGREGA ENTITIS A USER"
+                        servicenameBig.text = "Agregar a la api" // "Sobre ${serviceDataItem!!.user.firstName}"
+                        servicename.text = "Agregar a la api" // "Me llamo ${serviceDataItem!!.user.firstName} ${serviceDataItem!!.user.lastName}"
                         servicelocation.text = "Vivo en ${serviceDataItem!!.location}"
                         servicedni.text = "${serviceDataItem!!.dni}"
                         servicedescription.text = "${serviceDataItem!!.description}"
@@ -189,3 +213,17 @@ class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.ReviewViewHolder>() {
         }
     }
 }
+
+    private fun avanzarServicio(serviceId: String,transaction: FragmentManager) {
+        val serviceFragment = ConfirmAnyServiceFragment()
+        val bundle = Bundle()
+        bundle.putString(serviceId, serviceId)
+
+        serviceFragment.arguments = bundle
+
+        val transaction = transaction.beginTransaction()
+        transaction.replace(R.id.fragment_container, serviceFragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
+    }
+

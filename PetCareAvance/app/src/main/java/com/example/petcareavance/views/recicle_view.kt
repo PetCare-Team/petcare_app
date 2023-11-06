@@ -9,10 +9,12 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.petcareavance.Fragments.AnyServiceFragment
 import com.example.petcareavance.R
+import com.example.petcareavance.editPet
 import com.example.petcareavance.room.AppDatabase
 import com.example.petcareavance.room.serviceroom
 import com.example.petcareavance.views.User
@@ -26,6 +28,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import java.util.zip.Inflater
 
 class RecycleViewFragment : Fragment() {
 
@@ -67,14 +70,14 @@ class RecycleViewFragment : Fragment() {
         val direccionTextView: TextView = view.findViewById(R.id.editLocationText) // Asegúrate de usar el ID correcto
         direccionTextView.text = direccion
 
+        val transaction = requireFragmentManager()
 
-
-        getMyData(view)
+        getMyData(view,transaction)
 
         return view
     }
 
-    private fun getMyData(view: View) {
+    private fun getMyData(view: View,transaction: FragmentManager) {
         val retrofitBuilder = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(BASE_URL)
@@ -92,7 +95,7 @@ class RecycleViewFragment : Fragment() {
 
                 val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
                 recyclerView.layoutManager = LinearLayoutManager(requireContext())
-                recyclerView.adapter = UserAdapter(responseBody)
+                recyclerView.adapter = UserAdapter(responseBody,transaction)
             }
 
             override fun onFailure(call: Call<List<UserResponse>>, t: Throwable) {
@@ -114,7 +117,7 @@ class RecycleViewFragment : Fragment() {
         transaction.commit()
     }
 
-    class UserAdapter(private val userList: List<UserResponse>) : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
+    class UserAdapter(private val userList: List<UserResponse>, private val transaction: FragmentManager) : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
 
         class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             val userName: TextView = itemView.findViewById(R.id.userName)
@@ -143,6 +146,10 @@ class RecycleViewFragment : Fragment() {
                     fm.beginTransaction().replace(R.id.fragment_container, fragment)
                         .addToBackStack(null).commit()
                 }
+            holder.userName.setOnClickListener{
+
+                avanzarServicio(user.serviceId.toString())
+
             }
 
             holder.starIcon.setOnClickListener {
@@ -172,11 +179,25 @@ class RecycleViewFragment : Fragment() {
                 }
             }
         }
-
+        }
         override fun getItemCount() = userList.size
+
+        private fun avanzarServicio(serviceId: String) {
+            val anyServiceFragment = AnyServiceFragment()
+            val bundle = Bundle()
+            bundle.putString(anyServiceFragment.ARG_SERVICE_ID, serviceId)
+
+            anyServiceFragment.arguments = bundle
+
+            val transaction = transaction.beginTransaction()
+            transaction.replace(R.id.fragment_container, anyServiceFragment)
+            transaction.addToBackStack(null)
+            transaction.commit()
+        }
     }
 
     companion object {
         const val BASE_URL = "https://petcarebackend.azurewebsites.net/api/v1/"
     }
 }
+

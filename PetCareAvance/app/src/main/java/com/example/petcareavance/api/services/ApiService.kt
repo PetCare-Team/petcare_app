@@ -47,8 +47,8 @@ interface ApiService {
     fun getServices(): Call<List<ServiceResponse>>
 
 
-    @GET("api/v1/services/{userId}")
-    fun getServiceById( @Path("userId") userId: String): Call<ServiceResponse>
+    @GET("api/v1/services/{id}")
+    fun getServiceById(@Path("id") id:String): Call<ServiceResponse>
 
     @POST("api/v1/payment")
     fun postPayment(@Body addPaymentResponse: AddPaymentResponse
