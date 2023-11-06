@@ -188,10 +188,9 @@
         android:id="@+id/imageView15"
         android:layout_width="103dp"
         android:layout_height="89dp"
-        android:layout_marginTop="80dd p"
+        android:layout_marginTop="80dp"
         android:src="@drawable/person"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
