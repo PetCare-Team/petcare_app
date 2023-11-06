@@ -6,10 +6,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.example.petcareavance.R
 import com.example.petcareavance.api.RetrofitClient
 import com.example.petcareavance.api.dataclasses.services.ServiceResponse
@@ -19,22 +21,37 @@ import retrofit2.Response
 
 class AnyServiceFragment: Fragment() {
 
+    val ARG_SERVICE_ID: String = "0"
+
+
+    companion object {
+        const val ARG_SERVICE_ID = "serviceId"
+    }
+
     override  fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
         val view = inflater.inflate(R.layout.fragment_anyservice, container, false)
 
-
+        val transaction = requireFragmentManager()
         val btnRetroceder = view.findViewById<ImageButton>(R.id.imageView20)
 
         btnRetroceder.setOnClickListener {
             retroceder()
         }
 
+        val btnServiceConfirm = view.findViewById<Button>(R.id.btnreservarservice)
+
+        btnServiceConfirm.setOnClickListener{
+
+            avanzarServicio(ARG_SERVICE_ID,transaction)
+
+        }
+
          var serviceDataItem: ServiceResponse? = null
 
-        val call = RetrofitClient.instance.getServiceById() // Colocar id pro params
+        val call = RetrofitClient.instance.getServiceById(ARG_SERVICE_ID) // Colocar id pro params
 
         call.enqueue(object : Callback<ServiceResponse> {
             @SuppressLint("SetTextI18n")
@@ -52,13 +69,13 @@ class AnyServiceFragment: Fragment() {
                     val servicename: TextView = view.findViewById(R.id.servicename)
                     val servicedni: TextView = view.findViewById(R.id.servicedni)
                     val servicedescription: TextView = view.findViewById(R.id.servicedescription)
-                    val serviceprice: TextView = view.findViewById(R.id.serviceprice)
+                   // val serviceprice: TextView = view.findViewById(R.id.tvServicePrice)
 
                     servicename.text = "AGREGA A TUS ENTOITIS LA OPCION PARA ACCEDER A USER"
                     servicelocation.text = "Vivo en ${serviceDataItem!!.location}"
                     servicedni.text = "${serviceDataItem!!.dni}"
                     servicedescription.text = "${serviceDataItem!!.description}"
-                    serviceprice.text = "S/${serviceDataItem!!.price}.00 por dia"
+                   // serviceprice.text = "S/${serviceDataItem!!.price}.00 por dia"
 
                 } else {
                     Toast.makeText(requireContext(), "No se pudo obtener el servicio", Toast.LENGTH_LONG).show()
@@ -80,5 +97,18 @@ class AnyServiceFragment: Fragment() {
         parentFragmentManager.popBackStack()
 
 
+    }
+
+    private fun avanzarServicio(serviceId: String,transaction: FragmentManager) {
+        val serviceFragment = ConfirmAnyServiceFragment()
+        val bundle = Bundle()
+        bundle.putString(this.ARG_SERVICE_ID, serviceId)
+
+        serviceFragment.arguments = bundle
+
+        val transaction = transaction.beginTransaction()
+        transaction.replace(R.id.fragment_container, serviceFragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
     }
 }

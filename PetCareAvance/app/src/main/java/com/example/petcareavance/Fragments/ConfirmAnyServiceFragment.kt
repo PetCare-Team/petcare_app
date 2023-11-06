@@ -19,6 +19,8 @@ import retrofit2.Response
 
 class ConfirmAnyServiceFragment: Fragment() {
 
+    val ARG_SERVICE_ID: String = "0"
+
     override  fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -34,7 +36,7 @@ class ConfirmAnyServiceFragment: Fragment() {
 
          var serviceDataItem: ServiceResponse? = null
 
-        val call = RetrofitClient.instance.getServiceById() // Colocar id pro params
+        val call = RetrofitClient.instance.getServiceById(ARG_SERVICE_ID) // Colocar id pro params
 
         call.enqueue(object : Callback<ServiceResponse> {
             @SuppressLint("SetTextI18n")
@@ -48,16 +50,13 @@ class ConfirmAnyServiceFragment: Fragment() {
                 if (serviceDataItem != null) {
                     Toast.makeText(requireContext(), "Nombre del servicio: ${serviceDataItem}", Toast.LENGTH_LONG).show()
 
-                    val servicelocation: TextView = view.findViewById(R.id.servicelocation)
-                    val servicename: TextView = view.findViewById(R.id.servicename)
-                    val servicedni: TextView = view.findViewById(R.id.servicedni)
-                    val servicedescription: TextView = view.findViewById(R.id.servicedescription)
+                    val servicelocation: TextView = view.findViewById(R.id.tvLocation)
+                    val servicename: TextView = view.findViewById(R.id.tvNameService)
                     val serviceprice: TextView = view.findViewById(R.id.serviceprice)
 
-                    servicename.text = "AGREGA A TUS ENTOITIS LA OPCION PARA ACCEDER A USER"
+                    servicename.text = "${serviceDataItem!!.user.firstName}"
                     servicelocation.text = "Vivo en ${serviceDataItem!!.location}"
-                    servicedni.text = "${serviceDataItem!!.dni}"
-                    servicedescription.text = "${serviceDataItem!!.description}"
+
                     serviceprice.text = "S/${serviceDataItem!!.price}.00 por dia"
 
                 } else {
