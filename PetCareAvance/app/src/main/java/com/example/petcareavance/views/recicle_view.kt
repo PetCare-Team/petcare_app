@@ -8,8 +8,10 @@ import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.petcareavance.Fragments.AnyServiceFragment
 import com.example.petcareavance.R
 import com.example.petcareavance.room.AppDatabase
 import com.example.petcareavance.room.serviceroom
@@ -98,6 +100,19 @@ class RecycleViewFragment : Fragment() {
             }
         })
     }
+    private fun openDetailFragment(userResponse: UserResponse) {
+        val fragment = AnyServiceFragment() // Reemplaza esto con tu fragmento de detalles real
+        val bundle = Bundle()
+        // Agrega cualquier información necesaria como argumentos
+        bundle.putInt("SERVICE_ID", userResponse.serviceId)
+        // ... agregar otros datos si es necesario
+        fragment.arguments = bundle
+
+        val transaction = parentFragmentManager.beginTransaction()
+        transaction.replace(R.id.fragment_container, fragment) // Reemplaza 'fragment_container' con tu contenedor real
+        transaction.addToBackStack(null) // Agrega la transacción al back stack si deseas que el botón Atrás regrese a este fragmento
+        transaction.commit()
+    }
 
     class UserAdapter(private val userList: List<UserResponse>) : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
 
@@ -118,6 +133,17 @@ class RecycleViewFragment : Fragment() {
             holder.userName.text = user.user.firstName + " " +  user.user.lastName
             holder.userIdAsPrice.text = "S/. " + user.price.toString()
             holder.userAddress.text = user.location
+
+            holder.itemView.setOnClickListener {
+                (it.context as? FragmentActivity)?.supportFragmentManager?.let { fm ->
+                    val fragment = AnyServiceFragment() // Asegúrate de crear el fragmento de detalles
+                    val bundle = Bundle()
+                    bundle.putInt("SERVICE_ID", user.serviceId) // Pasa cualquier información necesaria
+                    fragment.arguments = bundle
+                    fm.beginTransaction().replace(R.id.fragment_container, fragment)
+                        .addToBackStack(null).commit()
+                }
+            }
 
             holder.starIcon.setOnClickListener {
                 it.isSelected = !it.isSelected

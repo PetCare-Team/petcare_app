@@ -1,75 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fillViewport="true"
     tools:context="Fragments.MyServices">
+<androidx.constraintlayout.widget.ConstraintLayout
 
-    <Button
-        android:id="@+id/btnreservarservice"
-        android:layout_width="139dp"
-        android:layout_height="58dp"
-        android:background="#FBB847"
-        android:text="Guardar"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.506"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.844" />
+    tools:context="Fragments.MyServices"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
+
 
     <View
         android:id="@+id/view7"
         android:layout_width="match_parent"
         android:layout_height="2dp"
+        android:layout_marginTop="252dp"
         android:background="#FBB847"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="252dp" />
-
-    <TextView
-        android:id="@+id/textView25"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="72dp"
-        android:text="VALORACIONBES"
-        android:textColor="#000000"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/servicedescription" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView36"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
+        android:layout_marginTop="52dp"
         android:text="Sobre NOMBRE"
         android:textColor="#000000"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.011"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="218dp" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView15" />
 
     <TextView
         android:id="@+id/textView46"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="308dp"
+        android:layout_marginTop="468dp"
         android:text="TARIFA"
         android:textColor="#000000"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.009"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/servicedni" />
 
@@ -77,24 +58,12 @@
         android:id="@+id/view10"
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="40dp"
         android:background="#FBB847"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView46" />
-
-    <TextView
-        android:id="@+id/serviceprice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="S- 10.00 por dia"
-        android:textColor="#000000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.351"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view10" />
 
     <View
         android:id="@+id/view9"
@@ -123,9 +92,9 @@
         android:id="@+id/servicedni"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="108dp"
+        android:layout_marginStart="112dp"
 
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="12dp"
         android:text="MI DNI"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -133,39 +102,40 @@
 
     <TextView
         android:id="@+id/servicedescription"
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
 
-        android:layout_marginTop="84dp"
+        android:layout_marginTop="80dp"
         android:text="Hola, mi nombre es xyz y soy paseador"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.436"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/servicelocation" />
 
-    <TextView
-        android:id="@+id/serviceabout2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:text="Ver mas"
-        android:textSize="14sp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/reviews_recycler_view"
+        android:layout_width="0dp"
+        android:layout_height="180dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView46"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.445"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="618dp" />
+        app:layout_constraintTop_toBottomOf="@+id/view9" />
 
     <TextView
         android:id="@+id/servicename"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
+        android:layout_marginTop="20dp"
         android:text="Me llamo NOMBRE APELLIDO"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.62"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="264dp" />
+        app:layout_constraintTop_toBottomOf="@+id/view7" />
 
     <ImageView
 
@@ -182,7 +152,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="12dp"
         android:src="@drawable/location"
         app:layout_constraintEnd_toStartOf="@+id/servicelocation"
         app:layout_constraintTop_toBottomOf="@+id/imageView22" />
@@ -191,10 +161,11 @@
         android:id="@+id/imageView22"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="14dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
         android:src="@drawable/boby"
         app:layout_constraintEnd_toStartOf="@+id/servicename"
-        tools:layout_editor_absoluteY="264dp" />
+        app:layout_constraintTop_toTopOf="@+id/view7" />
 
     <ImageView
         android:id="@+id/imageView25"
@@ -205,6 +176,21 @@
         android:src="@drawable/clock"
         app:layout_constraintEnd_toStartOf="@+id/servicedni"
         app:layout_constraintTop_toBottomOf="@+id/imageView13" />
+
+    <Button
+        android:id="@+id/btnreservarservice"
+        android:layout_width="139dp"
+        android:layout_height="58dp"
+        android:background="#FBB847"
+        android:text="Guardar"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/serviceprice"
+        app:layout_constraintVertical_bias="0.16" />
 
     <ImageView
         android:id="@+id/imageView15"
@@ -217,4 +203,32 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/textView25"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="72dp"
+        android:text="VALORACIONBES"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/servicedescription" />
+
+    <TextView
+        android:id="@+id/serviceprice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="S- 10.00 por dia"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.351"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view10" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
