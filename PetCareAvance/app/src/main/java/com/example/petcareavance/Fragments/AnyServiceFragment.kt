@@ -20,13 +20,28 @@ import com.example.petcareavance.R
 import com.example.petcareavance.api.RetrofitClient
 import com.example.petcareavance.api.dataclasses.review.ReviewResponse
 import com.example.petcareavance.api.dataclasses.services.ServiceResponse
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.MapView
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import android.content.Context
+import android.location.Address
+import android.location.Geocoder
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.GET
+import retrofit2.http.Query
+import java.io.IOException
+import java.util.Locale
+
 
 class AnyServiceFragment: Fragment() {
     private lateinit var reviewAdapter: ReviewAdapter
     private lateinit var reviewsList: RecyclerView
+    private lateinit var mapView: MapView
 
 
     val ARG_SERVICE_ID: String = "0"
@@ -48,6 +63,8 @@ class AnyServiceFragment: Fragment() {
         btnRetroceder.setOnClickListener {
             retroceder()
         }
+        mapView = view.findViewById(R.id.mapView)
+        mapView.onCreate(savedInstanceState)
 
 
 
@@ -126,6 +143,22 @@ class AnyServiceFragment: Fragment() {
                         servicedescription.text = "${serviceDataItem!!.description}"
                         serviceprice.text = "S/${serviceDataItem!!.price}.00 por dia"
 
+
+                        mapView.getMapAsync { googleMap ->
+                            // Aquí puedes usar la ubicación que obtienes de la API
+                            if (serviceDataItem != null) {
+                                val location = serviceDataItem!!.location
+                                val latLng = getLatLngFromLocation(requireContext(), location) // Correcto
+
+                                latLng?.let {
+                                    CameraUpdateFactory.newLatLngZoom(
+                                        it, 15f)
+                                }?.let { googleMap.moveCamera(it) }
+                                latLng?.let { MarkerOptions().position(it) }
+                                    ?.let { googleMap.addMarker(it) }
+                            }
+                        }
+
                     } else {
                         Toast.makeText(requireContext(), "No se pudo obtener el servicio", Toast.LENGTH_LONG).show()
                     }
@@ -138,12 +171,94 @@ class AnyServiceFragment: Fragment() {
             })
         }
 
+// Llama a la API de Geocoding
+        val retrofit = Retrofit.Builder()
+            .baseUrl("https://maps.googleapis.com/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val service = retrofit.create(GeocodingApiService::class.java)
+        val call2 = service.getFromLocationName("1600 Amphitheatre Parkway Mountain View, CA 94043", "AIzaSyCLZvaNirzalsxLZ1zzXjeZ_q7qvpNURvo")
+
+        call2.enqueue(object : Callback<GeocodingResponse> {
+            override fun onResponse(call: Call<GeocodingResponse>, response: Response<GeocodingResponse>) {
+                if (response.isSuccessful) {
+                    val geocodingResponse = response.body()
+                    val location = geocodingResponse?.results?.firstOrNull()?.geometry?.location
+                    if (location != null) {
+                        // Usa la latitud y longitud como necesites
+                    }
+                } else {
+                    // Manejar el caso de error
+                }
+            }
+
+            override fun onFailure(call: Call<GeocodingResponse>, t: Throwable) {
+                // Manejar la falla en la llamada a la API
+            }
+        })
 
 
 
         return view;
     }
 
+    fun getLatLngFromLocation(context: Context, location: String): LatLng? {
+        val geocoder = Geocoder(context, Locale.getDefault())
+        Log.d("location", "$location")
+
+        try {
+            val addresses: List<Address>? = geocoder.getFromLocationName(location, 1)
+            Log.d("XXXXX", "$addresses")
+            if (!addresses.isNullOrEmpty()) {
+                val address: Address = addresses[0]
+                return LatLng(address.latitude, address.longitude)
+            } else {
+                // Manejo del caso en que la dirección no se encuentra o está vacía
+                Toast.makeText(context, "Dirección no encontrada", Toast.LENGTH_LONG).show()
+            }
+        } catch (e: IOException) {
+            Log.e("GeocoderError", "Problema al obtener la ubicación", e)
+        }
+        return null
+    }
+
+
+    // No olvides llamar a los métodos del ciclo de vida de mapView en los métodos del ciclo de vida del fragment.
+    override fun onResume() {
+        super.onResume()
+        mapView.onResume()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        mapView.onStart()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        mapView.onStop()
+    }
+
+    override fun onPause() {
+        mapView.onPause()
+        super.onPause()
+    }
+
+    override fun onDestroy() {
+        mapView.onDestroy()
+        super.onDestroy()
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+        mapView.onLowMemory()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        mapView.onSaveInstanceState(outState)
+    }
     private fun loadReviews(serviceId:String) {
         // Aquí deberías hacer la llamada a tu API para obtener las reseñas
         // Por ejemplo, usando Retrofit puedes hacer algo como esto:
@@ -226,4 +341,22 @@ class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.ReviewViewHolder>() {
         transaction.addToBackStack(null)
         transaction.commit()
     }
+
+data class GeocodingResponse(val results: List<GeocodingResult>, val status: String)
+
+data class GeocodingResult(val geometry: Geometry)
+
+data class Geometry(val location: Location)
+
+data class Location(val lat: Double, val lng: Double)
+
+interface GeocodingApiService {
+    @GET("maps/api/geocode/json")
+    fun getFromLocationName(
+        @Query("address") address: String,
+        @Query("key") apiKey: String
+    ): Call<GeocodingResponse>
+}
+
+
 
