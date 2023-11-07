@@ -78,6 +78,9 @@ interface ApiService {
     @POST("api/v1/reviews")
     fun postReview(@Body reviewResponse: ReviewResource): Call<ReviewResponse>
 
+    @GET("api/v1/reviews")
+    fun getReviews(): Call<List<ReviewResponse>>
+
     @GET("api/v1/reviews/byuser/{userId}")
     fun getReview(@Header("Authorization") token: String, @Path("userId") userId: String ): Call<List<ReviewResponse>>
 

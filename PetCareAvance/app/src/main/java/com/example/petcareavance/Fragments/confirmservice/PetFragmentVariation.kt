@@ -1,7 +1,6 @@
 package com.example.petcareavance.Fragments.confirmservice
 
 import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,11 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.petcareavance.R
 import com.example.petcareavance.api.dataclasses.pets.PetResponse
@@ -24,7 +20,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class PetFragment : Fragment() {
+class PetFragmentVariation : Fragment() {
 
 
 
@@ -103,8 +99,13 @@ class PetFragment : Fragment() {
             val pet = petList[position]
             holder.petName.text = pet.name
             holder.petName.setOnClickListener(){
+                Toast.makeText(holder.itemView.context, "Mascota: ${pet.id}", Toast.LENGTH_SHORT).show()
+                val sharedPref = holder.itemView.context.getSharedPreferences("PetPreferences", Context.MODE_PRIVATE)
+                with(sharedPref.edit()) {
+                    putInt("PetId", pet.id)
+                    apply()
+                }
 
-                avanzarMascota(pet.id)
             }
 
         }
@@ -112,20 +113,18 @@ class PetFragment : Fragment() {
         override fun getItemCount() = petList.size
 
 
-        private fun avanzarMascota(petId: Int) {
-            val mascotaFragment = editPet()
-            val bundle = Bundle()
-            bundle.putInt(editPet.ARG_PERRO_ID, petId)
-
-            mascotaFragment.arguments = bundle
-
-            val transaction = transaction.beginTransaction()
-            transaction.replace(R.id.fragment_container, mascotaFragment)
-            transaction.addToBackStack(null)
-            transaction.commit()
-        }
-
-
+//        private fun avanzarMascota(petId: Int) {
+//            val mascotaFragment = editPet()
+//            val bundle = Bundle()
+//            bundle.putInt(editPet.ARG_PERRO_ID, petId)
+//
+//            mascotaFragment.arguments = bundle
+//
+//            val transaction = transaction.beginTransaction()
+//            transaction.replace(R.id.fragment_container, mascotaFragment)
+//            transaction.addToBackStack(null)
+//            transaction.commit()
+//        }
     }
 
 

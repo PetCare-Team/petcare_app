@@ -7,17 +7,16 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.example.petcareavance.Fragments.confirmservice.PetFragmentVariation
 import com.example.petcareavance.R
 import com.example.petcareavance.api.RetrofitClient
 import com.example.petcareavance.api.dataclasses.pets.PetResponse
 import com.example.petcareavance.api.dataclasses.services.ServiceResponse
-import com.example.petcareavance.editPet
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -40,6 +39,17 @@ class ConfirmAnyServiceFragment: Fragment() {
 
         val serviceId=arguments?.getString(ARG_SERVICE_ID, "-1")!!
 
+
+        val editarPet: TextView = view.findViewById<TextView>(R.id.textView54) // EDITAR PET
+        val editarFecha: TextView = view.findViewById<TextView>(R.id.textView55) // EDITAR FECHA
+
+
+
+        editarPet.setOnClickListener {
+            navigateToPetFragment()
+        }
+
+
         val btnRetroceder = view.findViewById<ImageView>(R.id.imageView20)
 
         btnRetroceder.setOnClickListener {
@@ -54,6 +64,9 @@ class ConfirmAnyServiceFragment: Fragment() {
         val sharedPreferences2 = requireActivity().getSharedPreferences("UserToken", Context.MODE_PRIVATE)
         val token = sharedPreferences2.getString("Token", "") ?: ""
 
+        // Obtener id del pet
+        val sharedPref = requireActivity().getSharedPreferences("PetPreferences", Context.MODE_PRIVATE)
+        val petId = sharedPref.getInt("PetId", -1) // Usa -1 como valor por defecto en caso de que PetId no exista.
 
         val call2 = RetrofitClient.instance.getPetByUser(token, userId) // Colocar id pro params
 
@@ -73,7 +86,18 @@ class ConfirmAnyServiceFragment: Fragment() {
 
                     val amscotaValue:TextView = view.findViewById(R.id.tvMascotaSelect)
 
-                    amscotaValue.text = "${petDataItems!![0].name}"
+                    if(petId!= null && petId != -1 ){
+                        val matchingPet = petDataItems!!.find { it.id == petId }
+                        if (matchingPet != null) {
+                            // Si encontramos una mascota con el ID, establecemos su nombre
+                            amscotaValue.text = matchingPet.name
+                        } else {
+                            // Manejar la situación en la que no hay ninguna mascota con ese ID
+                            amscotaValue.text = "Elige tu mascota"
+                        }
+
+                    }
+
 
 
                 } else {
@@ -172,4 +196,13 @@ class ConfirmAnyServiceFragment: Fragment() {
 
 
     }
+    private fun navigateToPetFragment() {
+        val petFragmentVariation = PetFragmentVariation()
+        // Assuming you're using a `FrameLayout` with the id `fragment_container` to swap out your fragments
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, petFragmentVariation)
+            .addToBackStack(null) // Add transaction to the back stack if you want the back button to return to the previous fragment
+            .commit()
+    }
+
 }

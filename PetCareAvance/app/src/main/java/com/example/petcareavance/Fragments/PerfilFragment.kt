@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.example.petcareavance.Fragments.confirmservice.PetFragmentVariation
 import com.example.petcareavance.MainActivity
 import com.example.petcareavance.R
 import com.example.petcareavance.api.RetrofitClient
@@ -74,9 +75,9 @@ class   PerfilFragment : Fragment() {
 
         }
 
-        // Obtener User ID de SharedPreferences
-        val sharedPreferences = requireActivity().getSharedPreferences("UserID", Context.MODE_PRIVATE)
-        val userId = sharedPreferences.getString("ID", "") ?: ""
+            // Obtener User ID de SharedPreferences
+            val sharedPreferences = requireActivity().getSharedPreferences("UserID", Context.MODE_PRIVATE)
+            val userId = sharedPreferences.getString("ID", "") ?: ""
 
         // Obtener Token de SharedPreferences
         val sharedPreferences2 = requireActivity().getSharedPreferences("UserToken", Context.MODE_PRIVATE)
@@ -121,7 +122,7 @@ class   PerfilFragment : Fragment() {
     }
 
     private fun avanzarMascota() {
-        val mascotaFragment = PetFragment()
+        val mascotaFragment = PetFragmentVariation()
         val transaction = requireFragmentManager().beginTransaction()
 
         transaction.replace(R.id.fragment_container, mascotaFragment)

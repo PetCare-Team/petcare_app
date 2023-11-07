@@ -263,14 +263,22 @@ class AnyServiceFragment: Fragment() {
     private fun loadReviews(serviceId:String) {
         // Aquí deberías hacer la llamada a tu API para obtener las reseñas
         // Por ejemplo, usando Retrofit puedes hacer algo como esto:
-        RetrofitClient.instance.getReviewByService(serviceId).enqueue(object : Callback<List<ReviewResponse>> {
+        RetrofitClient.instance.getReviews().enqueue(object : Callback<List<ReviewResponse>> {
             override fun onResponse(
                 call: Call<List<ReviewResponse>>,
                 response: Response<List<ReviewResponse>>
             ) {
                 if (response.isSuccessful) {
                     // Actualiza la UI con los datos de las reseñas
-                    reviewAdapter.setReviews(response.body() ?: emptyList())
+
+                    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                    serviceId
+                    Log.d("ANTES", "${response.body()}}")
+                    val filteredReviews = response.body()?.filter { it.service.serviceId.toString() == serviceId } ?: emptyList()
+                    Log.d("DESPUES", "${response.body()}}")
+
+
+                    reviewAdapter.setReviews(filteredReviews ?: emptyList())
                 } else {
                     Toast.makeText(requireContext(), "Error: ${response.errorBody()?.string()}", Toast.LENGTH_LONG).show()
                 }
@@ -323,7 +331,7 @@ class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.ReviewViewHolder>() {
         fun bind(review: ReviewResponse) {
             // Asumiendo que tienes un campo `userName` en la respuesta de la API:
             Log.d("review", "$review")
-            userName.text = review.userId.toString() // Usa el campo correcto de tu objeto `ReviewResponse`.
+            userName.text = review.user.firstName // Usa el campo correcto de tu objeto `ReviewResponse`.
             ratingBar.rating = review.stars.toFloat()
             // ...
         }

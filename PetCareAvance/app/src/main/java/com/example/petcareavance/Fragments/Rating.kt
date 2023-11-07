@@ -72,7 +72,7 @@ class Rating: Fragment() {
 
                     if (reviewResponse != null) {
                         for(review in reviewResponse) {
-                            if (review.serviceId == myParam) {
+                            if (review.service.serviceId == myParam) {
 
 
                                 // Actualizar las vistas con los datos obtenidos
