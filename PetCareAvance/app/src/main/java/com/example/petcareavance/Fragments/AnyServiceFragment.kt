@@ -137,8 +137,8 @@ class AnyServiceFragment: Fragment() {
                         val serviceprice: TextView = view.findViewById(R.id.serviceprice)
                         var servicenameBig: TextView = view.findViewById(R.id.textView36)
 
-                        servicenameBig.text = "Agregar a la api" // "Sobre ${serviceDataItem!!.user.firstName}"
-                        servicename.text = "Agregar a la api" // "Me llamo ${serviceDataItem!!.user.firstName} ${serviceDataItem!!.user.lastName}"
+                        servicenameBig.text =  "Sobre ${serviceDataItem!!.user.firstName}"
+                        servicename.text = "Me llamo ${serviceDataItem!!.user.firstName} ${serviceDataItem!!.user.lastName}"
                         servicelocation.text = "Vivo en ${serviceDataItem!!.location}"
                         servicedni.text = "${serviceDataItem!!.dni}"
                         servicedescription.text = "${serviceDataItem!!.description}"
