@@ -326,12 +326,15 @@ class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.ReviewViewHolder>() {
         // Inicializa las vistas aquí, como el TextView para el nombre de usuario, la imagen, etc.
         private val userName: TextView = itemView.findViewById(R.id.userName)
         private val ratingBar: RatingBar = itemView.findViewById(R.id.ratingBar2)
+        private val userServiceDate: TextView = itemView.findViewById(R.id.userServiceDate)
         // Más vistas...
 
         fun bind(review: ReviewResponse) {
             // Asumiendo que tienes un campo `userName` en la respuesta de la API:
             Log.d("review", "$review")
             userName.text = review.user.firstName // Usa el campo correcto de tu objeto `ReviewResponse`.
+            userServiceDate.text = review.description // Usa el campo correcto de tu objeto `ReviewResponse`.
+
             ratingBar.rating = review.stars.toFloat()
             // ...
         }
