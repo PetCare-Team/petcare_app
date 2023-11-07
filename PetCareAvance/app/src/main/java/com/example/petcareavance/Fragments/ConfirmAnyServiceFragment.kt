@@ -8,19 +8,27 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.petcareavance.R
 import com.example.petcareavance.api.RetrofitClient
 import com.example.petcareavance.api.dataclasses.services.ServiceResponse
+import com.example.petcareavance.editPet
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class ConfirmAnyServiceFragment: Fragment() {
 
-    val ARG_SERVICE_ID: String = "0"
+
+
+
+    companion object {
+        const val ARG_SERVICE_ID = "serviceId"
+    }
+
 
     override  fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,6 +36,7 @@ class ConfirmAnyServiceFragment: Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_confirmservice, container, false)
 
+        val serviceId=arguments?.getString(ARG_SERVICE_ID, "-1")!!
 
         val btnRetroceder = view.findViewById<ImageView>(R.id.imageView20)
 
@@ -35,9 +44,14 @@ class ConfirmAnyServiceFragment: Fragment() {
             retroceder()
         }
 
-         var serviceDataItem: ServiceResponse? = null
+        var precio=0.00
+        var cuota=0.00
+        val cuotaText= view.findViewById<TextView>(R.id.tvCuota)
 
-        val call = RetrofitClient.instance.getServiceById(ARG_SERVICE_ID) // Colocar id pro params
+
+        var serviceDataItem: ServiceResponse? = null
+
+        val call = RetrofitClient.instance.getServiceById(serviceId) // Colocar id pro params
 
         call.enqueue(object : Callback<ServiceResponse> {
             @SuppressLint("SetTextI18n")
@@ -49,7 +63,7 @@ class ConfirmAnyServiceFragment: Fragment() {
                 val view = view ?: return
 
                 if (serviceDataItem != null) {
-                    Toast.makeText(requireContext(), "Nombre del servicio: ${serviceDataItem}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(), "Nombre del servicio: ${serviceId}", Toast.LENGTH_LONG).show()
 
                     val servicelocation: TextView = view.findViewById(R.id.tvLocation)
                     val servicename: TextView = view.findViewById(R.id.tvNameService)
@@ -59,6 +73,10 @@ class ConfirmAnyServiceFragment: Fragment() {
                     servicelocation.text = "Vivo en ${serviceDataItem!!.location}"
 
                     serviceprice.text = "S/${serviceDataItem!!.price}.00 por dia"
+                    precio=serviceDataItem!!.price.toDouble()
+
+                    cuota=(precio*0.2).toDouble()
+                    cuotaText.setText("S/${cuota}")
 
                 } else {
                     Toast.makeText(requireContext(), "No se pudo obtener el servicio", Toast.LENGTH_LONG).show()
@@ -70,6 +88,31 @@ class ConfirmAnyServiceFragment: Fragment() {
                 Toast.makeText(requireContext(), "Error: ${t.message}", Toast.LENGTH_LONG).show()
             }
         })
+
+        val radioGroup = view.findViewById<RadioGroup>(R.id.rgServiceType)
+        val adicional= view.findViewById<TextView>(R.id.tvAdicional)
+        val total= view.findViewById<TextView>(R.id.tvTotal)
+
+
+        radioGroup.setOnCheckedChangeListener { group, checkedId ->
+            when (checkedId) {
+                R.id.rbPremium-> {
+                    Toast.makeText(requireContext(), "Nombre del servicio: ${cuota}", Toast.LENGTH_LONG).show()
+
+                    adicional.setText("S/20.00")
+                    total.setText("S/"+(cuota+20+precio))
+
+                }
+                R.id.rbBasic -> {
+                    Toast.makeText(requireContext(), "Nombre del servicio: ${cuota}", Toast.LENGTH_LONG).show()
+
+                    adicional.setText("S/0.00")
+                    total.setText("S/"+(cuota+precio))
+                }
+
+            }
+        }
+
 
 
         return view;

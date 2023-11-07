@@ -73,10 +73,11 @@ class AnyServiceFragment: Fragment() {
         reviewsRecyclerView.layoutManager = LinearLayoutManager(context)
         reviewsRecyclerView.adapter = reviewAdapter
         val btnServiceConfirm = view.findViewById<Button>(R.id.btnreservarservice)
+        val serviceId = arguments?.getInt("SERVICE_ID") ?: -1
 
         btnServiceConfirm.setOnClickListener{
 
-            avanzarServicio(ARG_SERVICE_ID,transaction)
+            avanzarServicio(serviceId.toString() ,transaction)
 
         }
 
@@ -88,7 +89,7 @@ class AnyServiceFragment: Fragment() {
 
 
         var call: Call<ServiceResponse>? = null
-        val serviceId = arguments?.getInt("SERVICE_ID") ?: -1 // -1 como valor por defecto si no se encuentra
+       // -1 como valor por defecto si no se encuentra
         if (serviceId == -1) {
             Toast.makeText(requireContext(), "ID del servicio no encontrado", Toast.LENGTH_LONG).show()
             return view // Salir de la función si no hay ID válido.
@@ -332,7 +333,7 @@ class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.ReviewViewHolder>() {
     private fun avanzarServicio(serviceId: String,transaction: FragmentManager) {
         val serviceFragment = ConfirmAnyServiceFragment()
         val bundle = Bundle()
-        bundle.putString(serviceId, serviceId)
+        bundle.putString(ConfirmAnyServiceFragment.ARG_SERVICE_ID , serviceId)
 
         serviceFragment.arguments = bundle
 

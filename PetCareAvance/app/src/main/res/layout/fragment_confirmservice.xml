@@ -1,414 +1,392 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="Fragments.MyServices">
 
-    <TextView
-        android:id="@+id/textView59"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Débito *5657"
-        android:textSize="8sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.596"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.766" />
-
-    <TextView
-        android:id="@+id/textView39"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Metodo de pago"
-        android:textColor="#000000"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.119"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view8" />
-
-    <ImageView
-        android:id="@+id/imageView28"
-        android:layout_width="26dp"
-        android:layout_height="29dp"
-        android:src="@mipmap/visa"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.457"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.786" />
-
-    <TextView
-        android:id="@+id/textView60"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Pamela"
-        android:textColor="#808080"
-        android:textSize="8sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.566"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.786" />
-
-    <Button
-        android:id="@+id/btnreservarservice"
-        android:layout_width="139dp"
-        android:layout_height="58dp"
-        android:background="#FBB847"
-        android:text="RESERVAR"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.968"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.991" />
-
-    <View
-        android:id="@+id/view7"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="8dp"
-        android:layout_marginTop="12dp"
-        android:background="#FBB847"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView15" />
-
-    <TextView
-        android:id="@+id/textView25"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Tipo de servicio"
-        android:textColor="#000000"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.15"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view9" />
-
-    <RadioGroup
-        android:id="@+id/radioGroup"
-        android:layout_width="348dp"
-        android:layout_height="97dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView25">
-
-        <RadioButton
-            android:id="@+id/rbPremium"
-            android:layout_width="match_parent"
-            android:layout_height="21dp"
-            android:text="Premium"
-            android:textAlignment="textStart" />
+        android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/textView48"
-            android:layout_width="match_parent"
+            android:id="@+id/textView59"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="15px"
-            android:text="Ten contacto directo con tu paseador para ver el estado de tu mascota y tendras la posibilidad del servicio de cuidado para tu consentido "
-            android:textSize="10sp" />
-
-        <RadioButton
-            android:id="@+id/rbBasic"
-            android:layout_width="match_parent"
-            android:layout_height="21dp"
-            android:padding="5px"
-            android:text="Basic" />
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="18dp"
+            android:text="Débito *5657"
+            android:textSize="8sp"
+            app:layout_constraintStart_toEndOf="@+id/imageView28"
+            app:layout_constraintTop_toBottomOf="@+id/view8" />
 
         <TextView
-            android:id="@+id/textView49"
-            android:layout_width="match_parent"
+            android:id="@+id/textView39"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="5px"
-            android:text="Servicio de paseo basico para tu engreido"
-            android:textSize="10sp" />
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="20dp"
+            android:text="Metodo de pago"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view8" />
 
-    </RadioGroup>
+        <ImageView
+            android:id="@+id/imageView28"
+            android:layout_width="26dp"
+            android:layout_height="29dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="18dp"
+            android:src="@mipmap/visa"
+            app:layout_constraintStart_toEndOf="@+id/textView39"
+            app:layout_constraintTop_toBottomOf="@+id/view8" />
 
-    <TextView
-        android:id="@+id/tvNameService"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="NOMBRE"
-        android:textColor="#000000"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.51"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/servicedescription2" />
+        <TextView
+            android:id="@+id/textView60"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="3dp"
+            android:text="Pamela"
+            android:textColor="#808080"
+            android:textSize="8sp"
+            app:layout_constraintStart_toEndOf="@+id/imageView28"
+            app:layout_constraintTop_toBottomOf="@+id/textView59" />
 
-    <TextView
-        android:id="@+id/textView37"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Confirmar reserva"
-        android:textColor="#000000"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.203"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/btnreservarservice"
+            android:layout_width="139dp"
+            android:layout_height="58dp"
+            android:layout_marginTop="133dp"
+            android:layout_marginEnd="8dp"
+            android:background="#FBB847"
+            android:text="RESERVAR"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view8" />
 
-    <View
-        android:id="@+id/view9"
-        android:layout_width="match_parent"
-        android:layout_height="8dp"
-        android:layout_marginTop="8dp"
-        android:background="#FBB847"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvDateSelect" />
+        <View
+            android:id="@+id/view7"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:layout_marginTop="12dp"
+            android:background="#FBB847"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView15" />
 
-    <View
-        android:id="@+id/view8"
-        android:layout_width="match_parent"
-        android:layout_height="8dp"
-        android:layout_marginTop="20dp"
-        android:background="#FBB847"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+        <TextView
+            android:id="@+id/textView25"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="24dp"
+            android:text="Tipo de servicio"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view9" />
 
-    <TextView
-        android:id="@+id/tvLocation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="176dp"
+        <RadioGroup
+            android:id="@+id/rgServiceType"
+            android:layout_width="348dp"
+            android:layout_height="97dp"
+            android:layout_marginStart="42dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView25">
 
-        android:layout_marginTop="12dp"
-        android:text="Direccion"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvNameService" />
+            <RadioButton
+                android:id="@+id/rbPremium"
+                android:layout_width="match_parent"
+                android:layout_height="21dp"
+                android:text="Premium"
+                android:textAlignment="textStart" />
 
-    <TextView
-        android:id="@+id/servicedescription2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+            <TextView
+                android:id="@+id/textView48"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="15px"
+                android:text="Ten contacto directo con tu paseador para ver el estado de tu mascota y tendras la posibilidad del servicio de cuidado para tu consentido "
+                android:textSize="10sp" />
 
-        android:layout_marginTop="40dp"
-        android:text="Paseador"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView37" />
+            <RadioButton
+                android:id="@+id/rbBasic"
+                android:layout_width="match_parent"
+                android:layout_height="21dp"
+                android:padding="5px"
+                android:text="Basic" />
 
-    <TextView
-        android:id="@+id/tvMascotaSelect"
-        android:layout_width="255dp"
-        android:layout_height="wrap_content"
+            <TextView
+                android:id="@+id/textView49"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5px"
+                android:text="Servicio de paseo basico para tu engreido"
+                android:textSize="10sp" />
 
-        android:layout_marginTop="8dp"
-        android:text="NOMBRE"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.282"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ervicelocation" />
+        </RadioGroup>
 
-    <TextView
-        android:id="@+id/tvDateSelect"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
+        <TextView
+            android:id="@+id/tvNameService"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:text="NOMBRE"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@+id/imageView15"
+            app:layout_constraintTop_toBottomOf="@+id/servicedescription2" />
 
-        android:layout_marginTop="8dp"
-        android:text="12 - 14 sept / 10pm"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/servicelocation" />
+        <TextView
+            android:id="@+id/textView37"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="9dp"
+            android:layout_marginTop="16dp"
+            android:text="Confirmar reserva"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@+id/imageView20"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView36"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="Tu reserva"
-        android:textColor="#000000"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.124"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view7" />
+        <View
+            android:id="@+id/view9"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:layout_marginTop="7dp"
+            android:background="#FBB847"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDateSelect" />
 
-    <TextView
-        android:id="@+id/ervicelocation"
-        android:layout_width="56dp"
-        android:layout_height="20dp"
+        <View
+            android:id="@+id/view8"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:layout_marginTop="21dp"
+            android:background="#FBB847"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rgServiceType" />
 
-        android:layout_marginTop="12dp"
-        android:text="Mascota"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.123"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView36" />
+        <TextView
+            android:id="@+id/tvLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
 
-    <TextView
-        android:id="@+id/textView54"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="188dp"
-        android:layout_marginTop="12dp"
-        android:text="Editar"
-        app:layout_constraintStart_toEndOf="@+id/ervicelocation"
-        app:layout_constraintTop_toBottomOf="@+id/textView36" />
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="12dp"
+            android:text="Direccion"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@+id/imageView15"
+            app:layout_constraintTop_toBottomOf="@+id/tvNameService" />
 
-    <TextView
-        android:id="@+id/servicelocation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
+        <TextView
+            android:id="@+id/servicedescription2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
 
-        android:layout_marginTop="40dp"
-        android:text="Fecha"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ervicelocation" />
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="40dp"
+            android:text="Paseador"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@+id/imageView15"
+            app:layout_constraintTop_toBottomOf="@+id/textView37" />
 
-    <TextView
-        android:id="@+id/textView55"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="204dp"
-        android:layout_marginTop="12dp"
-        android:text="Editar"
-        app:layout_constraintStart_toEndOf="@+id/servicelocation"
-        app:layout_constraintTop_toBottomOf="@+id/tvMascotaSelect" />
+        <TextView
+            android:id="@+id/tvMascotaSelect"
+            android:layout_width="255dp"
+            android:layout_height="wrap_content"
 
-    <ImageView
+            android:layout_marginStart="44dp"
+            android:layout_marginTop="9dp"
+            android:text="NOMBRE"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ervicelocation" />
 
-        android:id="@+id/imageView20"
-        android:layout_width="49dp"
-        android:layout_height="51dp"
-        android:onClick="retroceder"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_leftkey_foreground" />
+        <TextView
+            android:id="@+id/tvDateSelect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
 
-    <ImageView
-        android:id="@+id/imageView15"
-        android:layout_width="103dp"
-        android:layout_height="89dp"
-        android:layout_marginTop="80dp"
-        android:src="@drawable/boby"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.159"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            android:layout_marginStart="44dp"
+            android:layout_marginTop="8dp"
+            android:text="12 - 14 sept / 10pm"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/servicelocation" />
 
-    <TextView
-        android:id="@+id/textView51"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="16dp"
-        android:text="0.00"
-        android:textColor="#0E0E0E"
-        app:layout_constraintStart_toEndOf="@+id/textView50"
-        app:layout_constraintTop_toBottomOf="@+id/serviceprice" />
+        <TextView
+            android:id="@+id/textView36"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="42dp"
+            android:layout_marginTop="13dp"
+            android:text="Tu reserva"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view7" />
 
-    <TextView
-        android:id="@+id/serviceprice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
-        android:text="S- 10.00 por dia"
-        android:textColor="#000000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView28" />
+        <TextView
+            android:id="@+id/ervicelocation"
+            android:layout_width="56dp"
+            android:layout_height="20dp"
 
-    <TextView
-        android:id="@+id/textView52"
-        android:layout_width="92dp"
-        android:layout_height="21dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="8dp"
-        android:text="Cuota PetCare"
-        android:textColor="#131313"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView50" />
+            android:layout_marginStart="44dp"
+            android:layout_marginTop="11dp"
+            android:text="Mascota"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView36" />
 
-    <TextView
-        android:id="@+id/textView53"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
-        android:text="2.00"
-        android:textColor="#101010"
-        app:layout_constraintStart_toEndOf="@+id/textView52"
-        app:layout_constraintTop_toBottomOf="@+id/textView51" />
+        <TextView
+            android:id="@+id/textView54"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="188dp"
+            android:layout_marginTop="46dp"
+            android:text="Editar"
+            app:layout_constraintStart_toEndOf="@+id/ervicelocation"
+            app:layout_constraintTop_toBottomOf="@+id/view7" />
 
-    <TextView
-        android:id="@+id/textView50"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Adicional"
-        android:textColor="#070707"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.118"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView46" />
+        <TextView
+            android:id="@+id/servicelocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
 
-    <TextView
-        android:id="@+id/textView46"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:text="Tarifa"
-        android:textColor="#000000"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.112"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView39" />
+            android:layout_marginStart="44dp"
+            android:layout_marginTop="13dp"
+            android:text="Fecha"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvMascotaSelect" />
 
-    <TextView
-        android:id="@+id/textView58"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="8dp"
-        android:text="Total"
-        android:textColor="#090909"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView52" />
+        <TextView
+            android:id="@+id/textView55"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="204dp"
+            android:layout_marginTop="12dp"
+            android:text="Editar"
+            app:layout_constraintStart_toEndOf="@+id/servicelocation"
+            app:layout_constraintTop_toBottomOf="@+id/tvMascotaSelect" />
 
-    <TextView
-        android:id="@+id/textView57"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="84dp"
-        android:layout_marginTop="8dp"
-        android:text="12.00"
-        android:textColor="#0B0A0A"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/textView58"
-        app:layout_constraintTop_toBottomOf="@+id/textView53" />
+        <ImageView
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            android:id="@+id/imageView20"
+            android:layout_width="49dp"
+            android:layout_height="51dp"
+            android:onClick="retroceder"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_leftkey_foreground" />
+
+        <ImageView
+            android:id="@+id/imageView15"
+            android:layout_width="103dp"
+            android:layout_height="89dp"
+            android:layout_marginStart="49dp"
+            android:layout_marginTop="42dp"
+            android:src="@drawable/boby"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView37" />
+
+        <TextView
+            android:id="@+id/tvAdicional"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="57dp"
+            android:layout_marginTop="20dp"
+            android:text="0.00"
+            android:textColor="#0E0E0E"
+            app:layout_constraintStart_toEndOf="@+id/textView50"
+            app:layout_constraintTop_toBottomOf="@+id/serviceprice" />
+
+        <TextView
+            android:id="@+id/serviceprice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="79dp"
+            android:layout_marginTop="18dp"
+            android:text="S- 10.00 por dia"
+            android:textColor="#000000"
+            app:layout_constraintStart_toEndOf="@+id/textView46"
+            app:layout_constraintTop_toBottomOf="@+id/imageView28" />
+
+        <TextView
+            android:id="@+id/textView52"
+            android:layout_width="92dp"
+            android:layout_height="21dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="9dp"
+            android:text="Cuota PetCare"
+            android:textColor="#131313"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView50" />
+
+        <TextView
+            android:id="@+id/tvCuota"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:text="2.00"
+            android:textColor="#101010"
+            app:layout_constraintStart_toEndOf="@+id/textView52"
+            app:layout_constraintTop_toBottomOf="@+id/tvAdicional" />
+
+        <TextView
+            android:id="@+id/textView50"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="42dp"
+            android:layout_marginTop="16dp"
+            android:text="Adicional"
+            android:textColor="#070707"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView46" />
+
+        <TextView
+            android:id="@+id/textView46"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="42dp"
+            android:layout_marginTop="28dp"
+            android:text="Tarifa"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView39" />
+
+        <TextView
+            android:id="@+id/textView58"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="8dp"
+            android:text="Total"
+            android:textColor="#090909"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView52" />
+
+        <TextView
+            android:id="@+id/tvTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="84dp"
+            android:layout_marginTop="11dp"
+            android:text="12.00"
+            android:textColor="#0B0A0A"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/textView58"
+            app:layout_constraintTop_toBottomOf="@+id/tvCuota" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
