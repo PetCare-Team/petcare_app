@@ -1,6 +1,7 @@
 package com.example.petcareavance.Fragments
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,6 +15,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.petcareavance.R
 import com.example.petcareavance.api.RetrofitClient
+import com.example.petcareavance.api.dataclasses.pets.PetResponse
 import com.example.petcareavance.api.dataclasses.services.ServiceResponse
 import com.example.petcareavance.editPet
 import retrofit2.Call
@@ -43,6 +45,52 @@ class ConfirmAnyServiceFragment: Fragment() {
         btnRetroceder.setOnClickListener {
             retroceder()
         }
+
+        // Obtener User ID de SharedPreferences
+        val sharedPreferences = requireActivity().getSharedPreferences("UserID", Context.MODE_PRIVATE)
+        val userId = sharedPreferences.getString("ID", "") ?: ""
+
+        // Obtener Token de SharedPreferences
+        val sharedPreferences2 = requireActivity().getSharedPreferences("UserToken", Context.MODE_PRIVATE)
+        val token = sharedPreferences2.getString("Token", "") ?: ""
+
+
+        val call2 = RetrofitClient.instance.getPetByUser(token, userId) // Colocar id pro params
+
+        var petDataItems: List<PetResponse>? = null
+
+        call2.enqueue(object : Callback<List<PetResponse>> {
+            @SuppressLint("SetTextI18n")
+            override fun onResponse(
+                call: Call<List<PetResponse>>,
+                response: Response<List<PetResponse>>
+            ) {
+                petDataItems = response.body()
+                val view = view ?: return
+
+                if (petDataItems != null) {
+                    Log.d("WWWW", "$petDataItems")
+
+                    val amscotaValue:TextView = view.findViewById(R.id.tvMascotaSelect)
+
+                    amscotaValue.text = "${petDataItems!![0].name}"
+
+
+                } else {
+                    Toast.makeText(requireContext(), "No se pudo obtener el servicio", Toast.LENGTH_LONG).show()
+                }
+            }
+
+            override fun onFailure(call: Call<List<PetResponse>>, t: Throwable) {
+                Log.d("asd", "${t.message}")
+                Toast.makeText(requireContext(), "Error: ${t.message}", Toast.LENGTH_LONG).show()
+            }
+        })
+
+
+
+
+
 
         var precio=0.00
         var cuota=0.00

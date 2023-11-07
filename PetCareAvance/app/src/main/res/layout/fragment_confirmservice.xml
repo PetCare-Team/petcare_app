@@ -207,7 +207,7 @@
             android:text="NOMBRE"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ervicelocation" />
+            app:layout_constraintTop_toBottomOf="@+id/mascotalabel" />
 
         <TextView
             android:id="@+id/tvDateSelect"
@@ -234,7 +234,7 @@
             app:layout_constraintTop_toBottomOf="@+id/view7" />
 
         <TextView
-            android:id="@+id/ervicelocation"
+            android:id="@+id/mascotalabel"
             android:layout_width="56dp"
             android:layout_height="20dp"
 
@@ -252,7 +252,7 @@
             android:layout_marginStart="188dp"
             android:layout_marginTop="46dp"
             android:text="Editar"
-            app:layout_constraintStart_toEndOf="@+id/ervicelocation"
+            app:layout_constraintStart_toEndOf="@+id/mascotalabel"
             app:layout_constraintTop_toBottomOf="@+id/view7" />
 
         <TextView
