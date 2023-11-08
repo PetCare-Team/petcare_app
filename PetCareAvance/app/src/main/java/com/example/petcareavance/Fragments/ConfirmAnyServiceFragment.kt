@@ -12,18 +12,21 @@ import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import com.example.petcareavance.EditDateFragment
 import com.example.petcareavance.Fragments.confirmservice.PetFragmentVariation
 import com.example.petcareavance.R
 import com.example.petcareavance.api.RetrofitClient
 import com.example.petcareavance.api.dataclasses.pets.PetResponse
 import com.example.petcareavance.api.dataclasses.services.ServiceResponse
+import com.example.petcareavance.views.SharedViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class ConfirmAnyServiceFragment: Fragment() {
 
-
+    private lateinit var sharedViewModel: SharedViewModel
 
 
     companion object {
@@ -38,15 +41,27 @@ class ConfirmAnyServiceFragment: Fragment() {
         val view = inflater.inflate(R.layout.fragment_confirmservice, container, false)
 
         val serviceId=arguments?.getString(ARG_SERVICE_ID, "-1")!!
+        sharedViewModel = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
+        val selectedDate = sharedViewModel.selectedDate
 
-
+        val fecha: TextView= view.findViewById(R.id.tvDateSelect)
         val editarPet: TextView = view.findViewById<TextView>(R.id.textView54) // EDITAR PET
         val editarFecha: TextView = view.findViewById<TextView>(R.id.textView55) // EDITAR FECHA
 
 
+        if(selectedDate!=null) {
+            fecha.setText(selectedDate)
+        }
+        else {
 
+            fecha.setText("introducir fecha")
+        }
         editarPet.setOnClickListener {
             navigateToPetFragment()
+        }
+        editarFecha.setOnClickListener{
+
+            navigateToEditDateFragment()
         }
 
 
@@ -204,5 +219,16 @@ class ConfirmAnyServiceFragment: Fragment() {
             .addToBackStack(null) // Add transaction to the back stack if you want the back button to return to the previous fragment
             .commit()
     }
+
+    private fun navigateToEditDateFragment() {
+        val editDateFragmentVariation = EditDateFragment()
+        // Assuming you're using a `FrameLayout` with the id `fragment_container` to swap out your fragments
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, editDateFragmentVariation)
+            .addToBackStack(null) // Add transaction to the back stack if you want the back button to return to the previous fragment
+            .commit()
+    }
+
+
 
 }

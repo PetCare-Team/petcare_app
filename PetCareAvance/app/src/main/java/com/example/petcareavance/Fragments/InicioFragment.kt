@@ -10,15 +10,22 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.example.petcareavance.R
+import com.example.petcareavance.views.SharedViewModel
+
 //import com.example.petcareavance.recicle_view // Asegúrate de que esta importación sea correcta
 
 class InicioFragment : Fragment() {
 
+    private lateinit var sharedViewModel: SharedViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        sharedViewModel = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
+
         val view = inflater.inflate(R.layout.fragment_inicio, container, false)
 
         val textView: TextView = view.findViewById(R.id.tvPerfil)
@@ -42,6 +49,9 @@ class InicioFragment : Fragment() {
             fecha.setText(selectedDate)
             Toast.makeText(context, "Fecha seleccionada: $selectedDate", Toast.LENGTH_SHORT).show()
             calendar.visibility = View.INVISIBLE
+            sharedViewModel.selectedDate = selectedDate
+
+
         }
 
         val textWatcher = object : TextWatcher {
