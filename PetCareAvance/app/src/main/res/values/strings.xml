@@ -1,4 +1,5 @@
 <resources>
+    <string name="underline_text"><u>Contáctanos</u></string>
     <string name="app_name">PetCareAvance</string>
     <string name="id">Ingrese ID</string>
     <string name="navegar">Navegar</string>
