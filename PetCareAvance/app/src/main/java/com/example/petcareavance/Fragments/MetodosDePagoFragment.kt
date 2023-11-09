@@ -67,6 +67,13 @@ class MetodosDePagoFragment : Fragment(), DeletePaymentCallback {
             agregarTarjetaLink()
         }
 
+        val btnRetroceder = view.findViewById<ImageView>(R.id.imageView31)
+
+
+        btnRetroceder.setOnClickListener {
+            retroceder()
+        }
+
         val retrofit = Retrofit.Builder()
             .baseUrl("https://petcarebackend.azurewebsites.net/")
             .addConverterFactory(GsonConverterFactory.create())
@@ -241,7 +248,10 @@ class MetodosDePagoFragment : Fragment(), DeletePaymentCallback {
             }
         }
     }
+    private fun retroceder(){
+        parentFragmentManager.popBackStack()
 
+    }
 
     fun agregarTarjetaLink (){
         Log.d("MetodosDePagoFragment", "agregarTarjetaLink called")
