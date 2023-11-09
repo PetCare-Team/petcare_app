@@ -68,11 +68,29 @@ class ConfirmAnyServiceFragment: Fragment() {
 
         if(selectedHour!=null) {
             hora.setText(selectedHour)
+            val splitHour =  selectedHour!!.split(":")
+
+            // Asegurarse de que se obtuvieron 2 partes (mes y año)
+            if (splitHour.size == 2) {
+                val hour = splitHour[0]
+                val minute = splitHour[1]
+
+                sharedViewModel.selectedHour = "2023-10-19T${hour}:${minute}:43.764Z"
+            } else {
+                println("Formato de Hora incorrecto")
+            }
+
+            Toast.makeText(requireContext(), "${sharedViewModel.selectedHour}", Toast.LENGTH_LONG).show()
+
         }
         else {
 
             hora.setText("introducir hora")
         }
+
+        //2023-10-19T20:35:43.764Z
+
+
 
 
         val btnRetroceder = view.findViewById<ImageView>(R.id.imageView20)

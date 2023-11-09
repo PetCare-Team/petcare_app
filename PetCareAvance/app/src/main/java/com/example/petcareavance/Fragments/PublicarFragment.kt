@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -49,6 +50,13 @@ class PublicarFragment : Fragment() {
             irAProcesoPublicacion()
         }
 
+        val btnRetroceder= view.findViewById<ImageView>(R.id.ivReturn2)
+
+        btnRetroceder.setOnClickListener{
+
+            retroceder()
+        }
+
         return view
     }
 
@@ -58,5 +66,15 @@ class PublicarFragment : Fragment() {
         transaction.replace(R.id.fragment_container, procesoPublicacionFragment)
         transaction.addToBackStack(null)
         transaction.commit()
+    }
+
+    private fun retroceder(){
+        val inicioFragment = InicioFragment()
+        val transaction: FragmentTransaction = requireFragmentManager().beginTransaction()
+        transaction.replace(R.id.fragment_container, inicioFragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
+
+
     }
 }
