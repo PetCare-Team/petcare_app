@@ -43,11 +43,13 @@ class ConfirmAnyServiceFragment: Fragment() {
         val serviceId=arguments?.getString(ARG_SERVICE_ID, "-1")!!
         sharedViewModel = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
         val selectedDate = sharedViewModel.selectedDate
+        val selectedHour = sharedViewModel.selectedHour
+
 
         val fecha: TextView= view.findViewById(R.id.tvDateSelect)
         val editarPet: TextView = view.findViewById<TextView>(R.id.textView54) // EDITAR PET
         val editarFecha: TextView = view.findViewById<TextView>(R.id.textView55) // EDITAR FECHA
-
+        val hora: TextView = view.findViewById<TextView>(R.id.tvHour)
 
         if(selectedDate!=null) {
             fecha.setText(selectedDate)
@@ -62,6 +64,14 @@ class ConfirmAnyServiceFragment: Fragment() {
         editarFecha.setOnClickListener{
 
             navigateToEditDateFragment()
+        }
+
+        if(selectedHour!=null) {
+            hora.setText(selectedHour)
+        }
+        else {
+
+            hora.setText("introducir hora")
         }
 
 

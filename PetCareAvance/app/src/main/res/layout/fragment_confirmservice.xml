@@ -216,7 +216,7 @@
 
             android:layout_marginStart="44dp"
             android:layout_marginTop="8dp"
-            android:text="12 - 14 sept / 10pm"
+            android:text="12 - 14 sept"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/servicelocation" />
@@ -387,6 +387,16 @@
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/textView58"
             app:layout_constraintTop_toBottomOf="@+id/tvCuota" />
+
+        <TextView
+            android:id="@+id/tvHour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="17dp"
+            android:layout_marginTop="41dp"
+            android:text="HORA"
+            app:layout_constraintStart_toEndOf="@+id/tvDateSelect"
+            app:layout_constraintTop_toBottomOf="@+id/tvMascotaSelect" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

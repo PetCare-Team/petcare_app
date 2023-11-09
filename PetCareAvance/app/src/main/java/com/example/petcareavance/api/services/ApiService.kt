@@ -6,6 +6,7 @@ import com.example.petcareavance.api.dataclasses.services.ServiceResponse
 import com.example.petcareavance.api.dataclasses.pets.PetResponse
 import com.example.petcareavance.api.dataclasses.pets.SavePetResource
 import com.example.petcareavance.api.dataclasses.reservas.ReservaResponse
+import com.example.petcareavance.api.dataclasses.reservas.SaveReservaResource
 import com.example.petcareavance.api.dataclasses.review.ReviewResource
 import com.example.petcareavance.api.dataclasses.review.ReviewResponse
 import com.example.petcareavance.api.dataclasses.review.SaveReviewResource
@@ -49,6 +50,9 @@ interface ApiService {
 
     @GET("api/v1/services/{id}")
     fun getServiceById(@Path("id") id:String): Call<ServiceResponse>
+
+    @POST
+    fun postService(@Body saveReserva: SaveReservaResource): Call<ReservaResponse>
 
     @POST("api/v1/payment")
     fun postPayment(@Body addPaymentResponse: AddPaymentResponse
