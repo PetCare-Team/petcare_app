@@ -8,9 +8,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.RadioButton
 import android.widget.RadioGroup
+import android.widget.RatingBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -21,16 +23,24 @@ import com.example.petcareavance.R
 import com.example.petcareavance.api.RetrofitClient
 import com.example.petcareavance.api.dataclasses.payment.PaymentResponse
 import com.example.petcareavance.api.dataclasses.pets.PetResponse
+import com.example.petcareavance.api.dataclasses.reservas.ReservaResponse
+import com.example.petcareavance.api.dataclasses.reservas.SaveReservaResource
+import com.example.petcareavance.api.dataclasses.review.ReviewResource
+import com.example.petcareavance.api.dataclasses.review.ReviewResponse
 import com.example.petcareavance.api.dataclasses.services.ServiceResponse
+import com.example.petcareavance.api.services.ApiService
 import com.example.petcareavance.views.SharedViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class ConfirmAnyServiceFragment: Fragment() {
 
     private lateinit var sharedViewModel: SharedViewModel
 
+    lateinit var apiService: ApiService
 
     companion object {
         const val ARG_SERVICE_ID = "serviceId"
@@ -43,27 +53,51 @@ class ConfirmAnyServiceFragment: Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_confirmservice, container, false)
 
-        val serviceId=arguments?.getString(ARG_SERVICE_ID, "-1")!!
+        val serviceId = arguments?.getString(ARG_SERVICE_ID, "-1")!!
         sharedViewModel = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
         val selectedDate = sharedViewModel.selectedDate
         val selectedHour = sharedViewModel.selectedHour
 
         var seleccionartarjeta: TextView = view.findViewById(R.id.textView59)
         var seleccionartarjetaNombre: TextView = view.findViewById(R.id.textView60)
-        val fecha: TextView= view.findViewById(R.id.tvDateSelect)
+        val fecha: TextView = view.findViewById(R.id.tvDateSelect)
         val editarPet: TextView = view.findViewById<TextView>(R.id.textView54) // EDITAR PET
         val editarFecha: TextView = view.findViewById<TextView>(R.id.textView55) // EDITAR FECHA
         val hora: TextView = view.findViewById<TextView>(R.id.tvHour)
 
+        // Obtener User ID de SharedPreferences
+        val sharedPreferences =
+            requireActivity().getSharedPreferences("UserID", Context.MODE_PRIVATE)
+        val userId = sharedPreferences.getString("ID", "") ?: ""
+
+        // Obtener Token de SharedPreferences
+        val sharedPreferences2 =
+            requireActivity().getSharedPreferences("UserToken", Context.MODE_PRIVATE)
+        val token = sharedPreferences2.getString("Token", "") ?: ""
+
+        // Obtener id del pet
+        val sharedPref =
+            requireActivity().getSharedPreferences("PetPreferences", Context.MODE_PRIVATE)
+        val petId = sharedPref.getInt(
+            "PetId",
+            -1
+        ) // Usa -1 como valor por defecto en caso de que PetId no exista.
+
+        //Obetener el id de la tarjeta
+        val sharedPrefForCardId =
+            requireActivity().getSharedPreferences("SelectedPayment", Context.MODE_PRIVATE)
+        val tarjetaId = sharedPrefForCardId.getInt(
+            "SelectedPaymentId",
+            -1
+        ) // Usa -1 como valor por defecto en caso de que PetId no exista.
 
 
 
 
 
-        if(selectedDate!=null) {
+        if (selectedDate != null) {
             fecha.setText(selectedDate)
-        }
-        else {
+        } else {
 
             fecha.setText("introducir fecha")
         }
@@ -74,14 +108,14 @@ class ConfirmAnyServiceFragment: Fragment() {
         editarPet.setOnClickListener {
             navigateToPetFragment()
         }
-        editarFecha.setOnClickListener{
+        editarFecha.setOnClickListener {
 
             navigateToEditDateFragment()
         }
 
-        if(selectedHour!=null) {
+        if (selectedHour != null) {
             hora.setText(selectedHour)
-            val splitHour =  selectedHour!!.split(":")
+            val splitHour = selectedHour!!.split(":")
 
             // Asegurarse de que se obtuvieron 2 partes (mes y año)
             if (splitHour.size == 2) {
@@ -93,15 +127,14 @@ class ConfirmAnyServiceFragment: Fragment() {
                 println("Formato de Hora incorrecto")
             }
 
-            Toast.makeText(requireContext(), "${sharedViewModel.selectedHour}", Toast.LENGTH_LONG).show()
+            Toast.makeText(requireContext(), "${sharedViewModel.selectedHour}", Toast.LENGTH_LONG)
+                .show()
 
-        }
-        else {
+        } else {
 
             hora.setText("introducir hora")
         }
 
-        //2023-10-19T20:35:43.764Z
 
 
 
@@ -112,21 +145,6 @@ class ConfirmAnyServiceFragment: Fragment() {
             retroceder()
         }
 
-        // Obtener User ID de SharedPreferences
-        val sharedPreferences = requireActivity().getSharedPreferences("UserID", Context.MODE_PRIVATE)
-        val userId = sharedPreferences.getString("ID", "") ?: ""
-
-        // Obtener Token de SharedPreferences
-        val sharedPreferences2 = requireActivity().getSharedPreferences("UserToken", Context.MODE_PRIVATE)
-        val token = sharedPreferences2.getString("Token", "") ?: ""
-
-        // Obtener id del pet
-        val sharedPref = requireActivity().getSharedPreferences("PetPreferences", Context.MODE_PRIVATE)
-        val petId = sharedPref.getInt("PetId", -1) // Usa -1 como valor por defecto en caso de que PetId no exista.
-
-        //Obetener el id de la tarjeta
-        val sharedPrefForCardId = requireActivity().getSharedPreferences("SelectedPayment", Context.MODE_PRIVATE)
-        val tarjetaId = sharedPrefForCardId.getInt("SelectedPaymentId", -1) // Usa -1 como valor por defecto en caso de que PetId no exista.
 
 
         // Primero, encuentra el botón RESERVAR y el RadioGroup en tu layout
@@ -135,26 +153,10 @@ class ConfirmAnyServiceFragment: Fragment() {
 
         // Establece un OnClickListener en el botón
         buttonReservar.setOnClickListener {
-            // Obtén el ID del RadioButton seleccionado
-            val selectedServiceTypeId = radioGroupServiceType.checkedRadioButtonId
-
-            // Encuentra el RadioButton seleccionado
-            val selectedServiceType = view.findViewById<RadioButton>(selectedServiceTypeId)
-
-            // Obtén el texto del RadioButton seleccionado
-            val selectedServiceText = selectedServiceType.text.toString()
 
 
 
-
-            // Registra la información
-            Log.d("selectedServiceText", "$selectedServiceText")
-            Log.d("userId", "$userId")
-            Log.d("token", "$token")
-            Log.d("petId", "$petId")
-            Log.d("tarjetaId", "$tarjetaId")
-            Log.d("selectedDate", "$selectedDate")
-            Log.d("selectedHour", "$selectedHour")
+          reservar(view,serviceId)
 
 
         }
@@ -361,6 +363,90 @@ class ConfirmAnyServiceFragment: Fragment() {
             .commit()
     }
 
+    private fun reservar(view: View ,serviceId:String) {
+
+
+        // Obtener User ID de SharedPreferences
+        val sharedPreferences =
+            requireActivity().getSharedPreferences("UserID", Context.MODE_PRIVATE)
+        val userId = sharedPreferences.getString("ID", "") ?: ""
+
+        // Obtener Token de SharedPreferences
+        val sharedPreferences2 =
+            requireActivity().getSharedPreferences("UserToken", Context.MODE_PRIVATE)
+        val token = sharedPreferences2.getString("Token", "") ?: ""
+
+        // Obtener id del pet
+        val sharedPref =
+            requireActivity().getSharedPreferences("PetPreferences", Context.MODE_PRIVATE)
+        val petId = sharedPref.getInt(
+            "PetId",
+            -1
+        ) // Usa -1 como valor por defecto en caso de que PetId no exista.
+
+        //Obetener el id de la tarjeta
+        val sharedPrefForCardId =
+            requireActivity().getSharedPreferences("SelectedPayment", Context.MODE_PRIVATE)
+        val tarjetaId = sharedPrefForCardId.getInt(
+            "SelectedPaymentId",
+            -1
+        ) // Usa -1 como valor por defecto en caso de que PetId no exista.
+
+
+        // Primero, encuentra el botón RESERVAR y el RadioGroup en tu layout
+        val buttonReservar = view.findViewById<Button>(R.id.btnreservarservice)
+        val radioGroupServiceType = view.findViewById<RadioGroup>(R.id.rgServiceType)
+
+        val reservaResource = SaveReservaResource(
+
+            date = sharedViewModel.selectedDate!!,
+            endHour = sharedViewModel.selectedHour!!,
+            startHour = sharedViewModel.selectedHour!!,
+            estadoId = 2,
+            serviceProviderId = serviceId.toInt(),
+            clientPaymentId = tarjetaId,
+
+            )
+
+
+        // Inicializar Retrofit
+        val retrofit = Retrofit.Builder()
+            .baseUrl("https://petcarebackend.azurewebsites.net/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+
+
+
+        apiService = retrofit.create(ApiService::class.java)
+
+
+        val call = apiService.postReserva(reservaResource)
+        call.enqueue(object : Callback<ReservaResponse> {
+            override fun onResponse(
+                call: Call<ReservaResponse>,
+                response: Response<ReservaResponse>
+            ) {
+                if (response.isSuccessful) {
+                    Log.e("Pubicado", "Pubicado")
+
+                } else {
+                    val error = response.errorBody()?.string() ?: "Unknown error"
+                    Toast.makeText(requireContext(), error, Toast.LENGTH_LONG).show()
+                    Log.e("Pubicado", "$error")
+                }
+
+            }
+
+            override fun onFailure(call: Call<ReservaResponse>, t: Throwable) {
+                context?.let {
+                    Toast.makeText(it, "Error: ${t.localizedMessage}", Toast.LENGTH_LONG).show()
+                    Log.e("Pubicado", "${t.localizedMessage}")
+
+                }
+            }
+        })
+    }
 
 
 }

@@ -52,7 +52,7 @@ interface ApiService {
     fun getServiceById(@Path("id") id:String): Call<ServiceResponse>
 
     @POST
-    fun postService(@Body saveReserva: SaveReservaResource): Call<ReservaResponse>
+    fun postReserva(@Body saveReserva: SaveReservaResource): Call<ReservaResponse>
 
     @POST("api/v1/payment")
     fun postPayment(@Body addPaymentResponse: AddPaymentResponse
