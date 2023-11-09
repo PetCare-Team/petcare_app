@@ -176,7 +176,6 @@ class ConfirmAnyServiceFragment: Fragment() {
                 val view = view ?: return
 
                 if (userCardItems != null) {
-                    Log.d("WWWW", "$userCardItems")
 
                     val amscotaValue:TextView = view.findViewById(R.id.tvMascotaSelect)
 
@@ -275,7 +274,7 @@ class ConfirmAnyServiceFragment: Fragment() {
                 val view = view ?: return
 
                 if (serviceDataItem != null) {
-                    Toast.makeText(requireContext(), "Nombre del servicio: ${serviceId}", Toast.LENGTH_LONG).show()
+//                    Toast.makeText(requireContext(), "Nombre del servicio: ${serviceId}", Toast.LENGTH_LONG).show()
 
                     val servicelocation: TextView = view.findViewById(R.id.tvLocation)
                     val servicename: TextView = view.findViewById(R.id.tvNameService)
@@ -309,14 +308,12 @@ class ConfirmAnyServiceFragment: Fragment() {
         radioGroup.setOnCheckedChangeListener { group, checkedId ->
             when (checkedId) {
                 R.id.rbPremium-> {
-                    Toast.makeText(requireContext(), "Nombre del servicio: ${cuota}", Toast.LENGTH_LONG).show()
 
                     adicional.setText("S/20.00")
                     total.setText("S/"+(cuota+20+precio))
 
                 }
                 R.id.rbBasic -> {
-                    Toast.makeText(requireContext(), "Nombre del servicio: ${cuota}", Toast.LENGTH_LONG).show()
 
                     adicional.setText("S/0.00")
                     total.setText("S/"+(cuota+precio))
@@ -428,7 +425,7 @@ class ConfirmAnyServiceFragment: Fragment() {
                 response: Response<ReservaResponse>
             ) {
                 if (response.isSuccessful) {
-                    Log.e("Pubicado", "Pubicado")
+                    Log.d("Pubicado", "Pubicado")
 
                 } else {
                     val error = response.errorBody()?.string() ?: "Unknown error"

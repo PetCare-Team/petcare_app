@@ -1,4 +1,5 @@
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -137,28 +138,15 @@ class RecycleViewFragment : Fragment() {
             holder.userIdAsPrice.text = "S/. " + user.price.toString()
             holder.userAddress.text = user.location
 
-            holder.itemView.setOnClickListener {
-                (it.context as? FragmentActivity)?.supportFragmentManager?.let { fm ->
-                    val fragment = AnyServiceFragment() // Asegúrate de crear el fragmento de detalles
-                    val bundle = Bundle()
-                    bundle.putInt("SERVICE_ID", user.serviceId) // Pasa cualquier información necesaria
-                    fragment.arguments = bundle
-                    fm.beginTransaction().replace(R.id.fragment_container, fragment)
-                        .addToBackStack(null).commit()
-                }
-            holder.userName.setOnClickListener{
-
-                avanzarServicio(user.serviceId.toString())
-
-            }
 
             holder.starIcon.setOnClickListener {
+                Log.d("GUARDAR", "Guardar")
+
                 it.isSelected = !it.isSelected
                 if (it.isSelected) {
 
                     // Cambiar imagen a estrella encendida
                     holder.starIcon.setImageResource(android.R.drawable.btn_star_big_on)
-
                     // Guardar en la base de datos
                     CoroutineScope(Dispatchers.IO).launch {
                         val userResponse = serviceroom(
@@ -178,6 +166,24 @@ class RecycleViewFragment : Fragment() {
                     }
                 }
             }
+
+
+            holder.itemView.setOnClickListener {
+                (it.context as? FragmentActivity)?.supportFragmentManager?.let { fm ->
+                    val fragment = AnyServiceFragment() // Asegúrate de crear el fragmento de detalles
+                    val bundle = Bundle()
+                    bundle.putInt("SERVICE_ID", user.serviceId) // Pasa cualquier información necesaria
+                    fragment.arguments = bundle
+                    fm.beginTransaction().replace(R.id.fragment_container, fragment)
+                        .addToBackStack(null).commit()
+                }
+            holder.userName.setOnClickListener{
+
+                avanzarServicio(user.serviceId.toString())
+
+            }
+
+
         }
         }
         override fun getItemCount() = userList.size

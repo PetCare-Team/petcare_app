@@ -51,7 +51,7 @@ interface ApiService {
     @GET("api/v1/services/{id}")
     fun getServiceById(@Path("id") id:String): Call<ServiceResponse>
 
-    @POST
+    @POST("api/v1/reserva")
     fun postReserva(@Body saveReserva: SaveReservaResource): Call<ReservaResponse>
 
     @POST("api/v1/payment")
