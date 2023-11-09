@@ -57,9 +57,9 @@ class EditDateFragment : Fragment() {
             btHour2.setBackgroundColor(Color.GRAY)
             btHour3.setBackgroundColor(Color.GRAY)
 
-            sharedViewModel.selectedHour = btHour1.text.toString()
+            sharedViewModel.selectedHour = btHour1.text.toString()+":00"
 
-
+            Toast.makeText(requireContext(), "${sharedViewModel.selectedHour}", Toast.LENGTH_LONG).show()
         }
 
         btHour2.setOnClickListener{
@@ -70,7 +70,9 @@ class EditDateFragment : Fragment() {
             btHour1.setBackgroundColor(Color.GRAY)
             btHour3.setBackgroundColor(Color.GRAY)
 
-            sharedViewModel.selectedHour = btHour2.text.toString()
+            sharedViewModel.selectedHour = btHour2.text.toString()+":00"
+
+            Toast.makeText(requireContext(), "${sharedViewModel.selectedHour}", Toast.LENGTH_LONG).show()
 
 
         }
@@ -83,7 +85,9 @@ class EditDateFragment : Fragment() {
             btHour2.setBackgroundColor(Color.GRAY)
             btHour1.setBackgroundColor(Color.GRAY)
 
-            sharedViewModel.selectedHour = btHour3.text.toString()
+            sharedViewModel.selectedHour = btHour3.text.toString()+":00"
+
+            Toast.makeText(requireContext(), "${sharedViewModel.selectedHour}", Toast.LENGTH_LONG).show()
 
 
         }
