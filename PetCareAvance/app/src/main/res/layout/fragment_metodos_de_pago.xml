@@ -14,7 +14,17 @@
 <!--        android:src="@drawable/ic_back" -->
 <!--    app:layout_constraintTop_toTopOf="parent"-->
 <!--    app:layout_constraintStart_toStartOf="parent" />-->
-a
+    a
+
+    <ImageView
+
+        android:id="@+id/imageView31"
+        android:layout_width="49dp"
+        android:layout_height="51dp"
+        android:onClick="retroceder"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_leftkey_foreground" />
 
     <TextView
         android:id="@+id/tvTitulo"

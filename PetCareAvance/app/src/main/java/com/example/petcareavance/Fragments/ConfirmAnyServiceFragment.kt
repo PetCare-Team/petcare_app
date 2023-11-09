@@ -7,7 +7,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
+import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
@@ -17,6 +19,7 @@ import com.example.petcareavance.EditDateFragment
 import com.example.petcareavance.Fragments.confirmservice.PetFragmentVariation
 import com.example.petcareavance.R
 import com.example.petcareavance.api.RetrofitClient
+import com.example.petcareavance.api.dataclasses.payment.PaymentResponse
 import com.example.petcareavance.api.dataclasses.pets.PetResponse
 import com.example.petcareavance.api.dataclasses.services.ServiceResponse
 import com.example.petcareavance.views.SharedViewModel
@@ -45,11 +48,17 @@ class ConfirmAnyServiceFragment: Fragment() {
         val selectedDate = sharedViewModel.selectedDate
         val selectedHour = sharedViewModel.selectedHour
 
-
+        var seleccionartarjeta: TextView = view.findViewById(R.id.textView59)
+        var seleccionartarjetaNombre: TextView = view.findViewById(R.id.textView60)
         val fecha: TextView= view.findViewById(R.id.tvDateSelect)
         val editarPet: TextView = view.findViewById<TextView>(R.id.textView54) // EDITAR PET
         val editarFecha: TextView = view.findViewById<TextView>(R.id.textView55) // EDITAR FECHA
         val hora: TextView = view.findViewById<TextView>(R.id.tvHour)
+
+
+
+
+
 
         if(selectedDate!=null) {
             fecha.setText(selectedDate)
@@ -57,6 +66,10 @@ class ConfirmAnyServiceFragment: Fragment() {
         else {
 
             fecha.setText("introducir fecha")
+        }
+
+        seleccionartarjeta.setOnClickListener {
+            navigateToSeleccionarTarjetaFragment()
         }
         editarPet.setOnClickListener {
             navigateToPetFragment()
@@ -111,7 +124,89 @@ class ConfirmAnyServiceFragment: Fragment() {
         val sharedPref = requireActivity().getSharedPreferences("PetPreferences", Context.MODE_PRIVATE)
         val petId = sharedPref.getInt("PetId", -1) // Usa -1 como valor por defecto en caso de que PetId no exista.
 
+        //Obetener el id de la tarjeta
+        val sharedPrefForCardId = requireActivity().getSharedPreferences("SelectedPayment", Context.MODE_PRIVATE)
+        val tarjetaId = sharedPrefForCardId.getInt("SelectedPaymentId", -1) // Usa -1 como valor por defecto en caso de que PetId no exista.
+
+
+        // Primero, encuentra el botón RESERVAR y el RadioGroup en tu layout
+        val buttonReservar = view.findViewById<Button>(R.id.btnreservarservice)
+        val radioGroupServiceType = view.findViewById<RadioGroup>(R.id.rgServiceType)
+
+        // Establece un OnClickListener en el botón
+        buttonReservar.setOnClickListener {
+            // Obtén el ID del RadioButton seleccionado
+            val selectedServiceTypeId = radioGroupServiceType.checkedRadioButtonId
+
+            // Encuentra el RadioButton seleccionado
+            val selectedServiceType = view.findViewById<RadioButton>(selectedServiceTypeId)
+
+            // Obtén el texto del RadioButton seleccionado
+            val selectedServiceText = selectedServiceType.text.toString()
+
+
+
+
+            // Registra la información
+            Log.d("selectedServiceText", "$selectedServiceText")
+            Log.d("userId", "$userId")
+            Log.d("token", "$token")
+            Log.d("petId", "$petId")
+            Log.d("tarjetaId", "$tarjetaId")
+            Log.d("selectedDate", "$selectedDate")
+            Log.d("selectedHour", "$selectedHour")
+
+
+        }
+
+        var call3 = RetrofitClient.instance.getPaymentByUser(token, userId)
+
+        var userCardItems: List<PaymentResponse>? = null
+
+
+        call3.enqueue(object : Callback<List<PaymentResponse>> {
+            @SuppressLint("SetTextI18n")
+            override fun onResponse(
+                call: Call<List<PaymentResponse>>,
+                response: Response<List<PaymentResponse>>
+            ) {
+                userCardItems = response.body()
+                val view = view ?: return
+
+                if (userCardItems != null) {
+                    Log.d("WWWW", "$userCardItems")
+
+                    val amscotaValue:TextView = view.findViewById(R.id.tvMascotaSelect)
+
+                    if(petId!= null && petId != -1 ){
+                        val matchingCard = userCardItems!!.find { it.id == tarjetaId }
+                        if (matchingCard != null) {
+                            // Si encontramos una mascota con el ID, establecemos su nombre
+                            seleccionartarjeta.text = "Debito *${matchingCard.number.takeLast(4)}"
+                            seleccionartarjetaNombre.text = "${matchingCard.name}"
+//                            amscotaValue.text = matchingCard.name
+                        } else {
+                            // Manejar la situación en la que no hay ninguna mascota con ese ID
+                            amscotaValue.text = "Elige tu mascota"
+                        }
+
+                    }
+
+
+
+                } else {
+                    Toast.makeText(requireContext(), "No se pudo obtener el servicio", Toast.LENGTH_LONG).show()
+                }
+            }
+
+            override fun onFailure(call: Call<List<PaymentResponse>>, t: Throwable) {
+                Log.d("asd", "${t.message}")
+                Toast.makeText(requireContext(), "Error: ${t.message}", Toast.LENGTH_LONG).show()
+            }
+        })
+
         val call2 = RetrofitClient.instance.getPetByUser(token, userId) // Colocar id pro params
+
 
         var petDataItems: List<PetResponse>? = null
 
@@ -244,6 +339,15 @@ class ConfirmAnyServiceFragment: Fragment() {
         // Assuming you're using a `FrameLayout` with the id `fragment_container` to swap out your fragments
         requireActivity().supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, petFragmentVariation)
+            .addToBackStack(null) // Add transaction to the back stack if you want the back button to return to the previous fragment
+            .commit()
+    }
+
+    private fun navigateToSeleccionarTarjetaFragment(){
+        val metodosDePagoFragment = MetodosDePagoFragment()
+        // Assuming you're using a `FrameLayout` with the id `fragment_container` to swap out your fragments
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, metodosDePagoFragment)
             .addToBackStack(null) // Add transaction to the back stack if you want the back button to return to the previous fragment
             .commit()
     }
