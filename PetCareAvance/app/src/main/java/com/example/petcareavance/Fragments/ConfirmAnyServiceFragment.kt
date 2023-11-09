@@ -425,7 +425,8 @@ class ConfirmAnyServiceFragment: Fragment() {
                 response: Response<ReservaResponse>
             ) {
                 if (response.isSuccessful) {
-                    Log.d("Pubicado", "Pubicado")
+                    Toast.makeText(requireContext(), "Reserva confirmada con éxito", Toast.LENGTH_LONG).show()
+
 
                 } else {
                     val error = response.errorBody()?.string() ?: "Unknown error"
