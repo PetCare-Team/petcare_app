@@ -64,7 +64,7 @@ class Rating: Fragment() {
 
         apiService = retrofit.create(ApiService::class.java)
 
-        val call = apiService.getReview( "Bearer " + token,userId)
+        val call = apiService.getReviews()
         call.enqueue(object : Callback<List<ReviewResponse>> {
             override fun onResponse(call: Call<List<ReviewResponse>>, response: Response<List<ReviewResponse>>) {
                 if (response.isSuccessful) {
