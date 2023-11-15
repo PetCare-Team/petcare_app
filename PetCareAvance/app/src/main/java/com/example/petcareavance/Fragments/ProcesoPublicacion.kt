@@ -42,9 +42,9 @@ class ProcesoPublicacion : Fragment() {
 
     private fun avanzar() {
 
-        val publicarServiceFragment = PublicarService()
-         val transaction = requireFragmentManager().beginTransaction()
-         transaction.replace(R.id.fragment_container, publicarServiceFragment)
+        val publicarServiceFragment = PublicarFragment()
+        val transaction = requireFragmentManager().beginTransaction()
+        transaction.replace(R.id.fragment_container, publicarServiceFragment)
         transaction.addToBackStack(null)
         transaction.commit()
     }

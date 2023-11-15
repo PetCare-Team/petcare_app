@@ -27,8 +27,6 @@ class InicioFragment : Fragment() {
         sharedViewModel = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
 
         val view = inflater.inflate(R.layout.fragment_inicio, container, false)
-
-        val textView: TextView = view.findViewById(R.id.tvPerfil)
         val calendar = view.findViewById<CalendarView>(R.id.cvCalendario)
         val fecha = view.findViewById<EditText>(R.id.etDate)
         val direccion = view.findViewById<EditText>(R.id.etAddress)
@@ -36,7 +34,6 @@ class InicioFragment : Fragment() {
 
         val sharedPreferences = activity?.getSharedPreferences("UserID", Context.MODE_PRIVATE)
         val id = sharedPreferences?.getString("ID", "No ID")
-        textView.text = "Estás en Inicio\nEl ID actual es: $id"
 
         calendar.visibility = View.INVISIBLE
 

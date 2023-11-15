@@ -5,6 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <Button
+        android:id="@+id/btnOculto"
+        android:layout_width="350dp"
+        android:layout_height="60dp"
+        android:background="#FBB847"
+        android:onClick="irAProcesoPublicacion"
+        android:text="Eliminar"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.928" />
+
     <Spinner
         android:id="@+id/snrHour"
         android:layout_width="350dp"
@@ -137,7 +153,7 @@
         app:layout_constraintVertical_bias="0.037" />
 
     <ImageView
-        android:id="@+id/ivReturn2"
+        android:id="@+id/imageView2"
         android:layout_width="79dp"
         android:layout_height="58dp"
         app:layout_constraintStart_toStartOf="parent"

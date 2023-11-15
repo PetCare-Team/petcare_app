@@ -1,5 +1,7 @@
 package com.example.petcareavance.api.services
 
+import com.example.petcareavance.api.dataclasses.faqs.FaqItem
+import com.example.petcareavance.api.dataclasses.helpquestion.HelpQuestionBody
 import com.example.petcareavance.api.dataclasses.payment.AddPaymentResponse
 import com.example.petcareavance.api.dataclasses.payment.PaymentResponse
 import com.example.petcareavance.api.dataclasses.services.ServiceResponse
@@ -10,6 +12,7 @@ import com.example.petcareavance.api.dataclasses.reservas.SaveReservaResource
 import com.example.petcareavance.api.dataclasses.review.ReviewResource
 import com.example.petcareavance.api.dataclasses.review.ReviewResponse
 import com.example.petcareavance.api.dataclasses.review.SaveReviewResource
+import com.example.petcareavance.api.dataclasses.services.ServicePostRequest
 import com.example.petcareavance.api.dataclasses.users.UserInfo
 import com.example.petcareavance.api.dataclasses.users.UserResponse
 import com.example.petcareavance.api.dataclasses.users.UserResponse2
@@ -47,6 +50,20 @@ interface ApiService {
     @GET("api/v1/services")
     fun getServices(): Call<List<ServiceResponse>>
 
+    @GET("api/v1/services/user/{userId}")
+    fun getServicesByUserId(@Path("userId") userId: Int): Call<List<ServiceResponse>>
+
+    @PUT("api/v1/services/{serviceId}")
+    fun updateService(
+        @Path("serviceId") serviceId: Int,
+        @Body servicePostRequest: ServicePostRequest
+    ): Call<ServiceResponse>
+
+
+    @DELETE("api/v1/services/{serviceId}")
+    fun deleteService(
+        @Path("serviceId") serviceId: Int
+    ): Call<Void>
 
     @GET("api/v1/services/{id}")
     fun getServiceById(@Path("id") id:String): Call<ServiceResponse>
@@ -94,4 +111,12 @@ interface ApiService {
     @GET("api/v1/reviews/byService/{serviceId}")
     fun getReviewByService(@Path("serviceId") userId: String): Call<List<ReviewResponse>>
 
+
+    @POST("api/v1/services")
+    fun postService(@Body servicePostRequest: ServicePostRequest
+    ): Call<ServicePostRequest>
+    @POST("api/v1/helpquestions")
+    fun postHelpQuestion(@Body body: HelpQuestionBody): Call<Void>
+    @GET("api/v1/faqs")
+    fun getFaqs(): Call<List<FaqItem>>
 }

@@ -42,4 +42,6 @@
 </string>
     <string name="email">Correo electrónico</string>
     <string name="contrasena">Contraseña</string>
+    <string name="publicar_servicio">PUBLICAR SERVICIO</string>
+    <string name="editar">EDITAR\n</string>
 </resources>

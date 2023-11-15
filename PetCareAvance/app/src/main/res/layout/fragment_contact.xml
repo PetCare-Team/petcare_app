@@ -7,30 +7,47 @@
 
 
     <EditText
-        android:id="@+id/etDescription2"
-        android:layout_width="344dp"
-        android:layout_height="120dp"
-        android:layout_marginTop="64dp"
+        android:id="@+id/etQuestion"
+        android:layout_width="314dp"
+        android:layout_height="122dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="136dp"
         android:background="@drawable/edit_text_background"
         android:ems="10"
-        android:enabled="false"
+        android:enabled="true"
         android:gravity="start"
         android:inputType="text"
         android:padding="25px"
         android:text="Describe el inconveniente"
         android:textAlignment="textStart"
         android:textColor="#808080"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView50" />
 
+    <EditText
+        android:id="@+id/etTitlle"
+        android:layout_width="309dp"
+        android:layout_height="67dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="52dp"
+        android:background="@drawable/edit_text_background"
+        android:ems="10"
+        android:enabled="true"
+        android:gravity="start"
+        android:inputType="text"
+        android:padding="25px"
+        android:text="Describe el inconveniente"
+        android:textAlignment="textStart"
+        android:textColor="#808080"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView50" />
 
     <TextView
         android:id="@+id/textView50"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginStart="76dp"
+        android:layout_marginTop="84dp"
         android:text="Contáctanos"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -51,14 +68,14 @@
 
     <Button
         android:id="@+id/button4"
-        android:layout_width="230dp"
-        android:layout_height="59dp"
-        android:layout_marginStart="88dp"
-        android:layout_marginTop="148dp"
+        android:layout_width="226dp"
+        android:layout_height="58dp"
+        android:layout_marginStart="104dp"
+        android:layout_marginTop="60dp"
         android:background="#FBB847"
         android:onClick="avanzar2"
         android:text="Guardar"
         android:textColor="#FFFFFF"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etDescription2" />
+        app:layout_constraintTop_toBottomOf="@+id/etQuestion" />
 </androidx.constraintlayout.widget.ConstraintLayout>
