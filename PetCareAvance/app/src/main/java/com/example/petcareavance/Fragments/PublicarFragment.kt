@@ -114,6 +114,8 @@ class PublicarFragment : Fragment() {
                                 btnService.setOnClickListener {
                                     val thisView = view ?: return@setOnClickListener
                                     getUserDataAndUpdateService(thisView)
+
+
                                 }
 
                             } else {

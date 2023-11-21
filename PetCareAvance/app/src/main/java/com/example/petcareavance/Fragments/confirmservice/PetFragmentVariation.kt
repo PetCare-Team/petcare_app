@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.GridLayoutManager
@@ -32,6 +33,7 @@ class PetFragmentVariation : Fragment() {
         val view = inflater.inflate(R.layout.fragment_pet, container, false)
 
 
+        val imReturn = view.findViewById<ImageView>(R.id.imReturn3)
         val rvListPet= view.findViewById<RecyclerView>(R.id.rvListPet)
 
         val transaction = requireFragmentManager()
@@ -74,7 +76,11 @@ class PetFragmentVariation : Fragment() {
 
         )
 
+    imReturn.setOnClickListener{
 
+        retroceder()
+
+    }
 
 
 
@@ -125,6 +131,12 @@ class PetFragmentVariation : Fragment() {
 //            transaction.addToBackStack(null)
 //            transaction.commit()
 //        }
+    }
+
+    private fun retroceder(){
+        parentFragmentManager.popBackStack()
+
+
     }
 
 
