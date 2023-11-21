@@ -59,6 +59,8 @@ class ConfirmAnyServiceFragment: Fragment() {
         val selectedHour = sharedViewModel.selectedHour
 
         var seleccionartarjeta: TextView = view.findViewById(R.id.textView59)
+        var seleccionartarjeta2: TextView = view.findViewById(R.id.textView60)
+        var seleccionartarjeta3: ImageView = view.findViewById(R.id.imageView28)
         var seleccionartarjetaNombre: TextView = view.findViewById(R.id.textView60)
         val fecha: TextView = view.findViewById(R.id.tvDateSelect)
         val editarPet: TextView = view.findViewById<TextView>(R.id.textView54) // EDITAR PET
@@ -103,6 +105,12 @@ class ConfirmAnyServiceFragment: Fragment() {
         }
 
         seleccionartarjeta.setOnClickListener {
+            navigateToSeleccionarTarjetaFragment()
+        }
+        seleccionartarjeta2.setOnClickListener {
+            navigateToSeleccionarTarjetaFragment()
+        }
+        seleccionartarjeta3.setOnClickListener {
             navigateToSeleccionarTarjetaFragment()
         }
         editarPet.setOnClickListener {

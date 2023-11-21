@@ -105,11 +105,12 @@ class AgregarMetodoDePagoFragment :Fragment() {
                     Toast.makeText(requireContext(), "Tarjeta actualizado exitosamente", Toast.LENGTH_LONG).show()
 
                 } else {
+                    Log.e("PRUEBA", "Error Code: ${addPaymentResponse.expiratedDay}")
                     Log.e("ERRORRRRR", "Error Code: ${response.code()}, Error Message: ${response.message()}")
                     Log.d("ERRRRRRRRRRROR", "HTTP Status Code: ${response.code()}")
                     Log.d("HTTP Response", "Response: $response")
 
-                    Toast.makeText(requireContext(), "Error: ${response.message()}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(), "Error: ${response.message()}, ingnrese una fecha valida", Toast.LENGTH_LONG).show()
                 }
             }
 

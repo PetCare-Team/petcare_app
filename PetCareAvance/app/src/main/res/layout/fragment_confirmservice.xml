@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:layout_marginTop="18dp"
-            android:text="Débito *5657"
+            android:text="Ingrese su tarjeta"
             android:textSize="8sp"
             app:layout_constraintStart_toEndOf="@+id/imageView28"
             app:layout_constraintTop_toBottomOf="@+id/view8" />
@@ -49,7 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="3dp"
-            android:text="Pamela"
+            android:text="Nombre"
             android:textColor="#808080"
             android:textSize="8sp"
             app:layout_constraintStart_toEndOf="@+id/imageView28"
