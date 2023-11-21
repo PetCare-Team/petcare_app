@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Switch
 import android.widget.Toast
 
@@ -52,7 +53,7 @@ class editPet : Fragment() {
         val etDescriptionPet= view.findViewById<EditText>(R.id.etDescription)
         val swCastrado= view.findViewById<Switch>(R.id.swCastrado)
         val btsave= view.findViewById<Button>(R.id.btSavePet)
-
+        val btnregresar = view.findViewById<ImageView>(R.id.imReturn)
         val id=arguments?.getInt(ARG_PERRO_ID, -1)!!
 
         val num= 2
@@ -87,6 +88,13 @@ class editPet : Fragment() {
         btsave.setOnClickListener {
             updatePerfil()
         }
+
+        btnregresar.setOnClickListener{
+
+            parentFragmentManager.popBackStack()
+
+        }
+
 
 
 
