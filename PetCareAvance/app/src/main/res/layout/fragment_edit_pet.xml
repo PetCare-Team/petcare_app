@@ -7,6 +7,15 @@
     android:layout_height="match_parent"
     tools:context=".editPet" >
 
+    <ImageView
+        android:id="@+id/imReturn"
+        android:layout_width="47dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="7dp"
+        android:src="@drawable/ic_leftkey_foreground"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/textView18"
         android:layout_width="wrap_content"

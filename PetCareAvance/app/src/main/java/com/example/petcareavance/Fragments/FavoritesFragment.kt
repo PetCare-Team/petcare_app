@@ -30,6 +30,12 @@ class FavoritesFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_favorites, container, false)
 
         val recyclerView: RecyclerView = view.findViewById(R.id.recyclerViewFavorites)
+        val returnbtn: ImageView = view.findViewById(R.id.imageView32)
+
+        returnbtn.setOnClickListener{
+            parentFragmentManager.popBackStack()
+
+        }
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         // Inicializar el adaptador

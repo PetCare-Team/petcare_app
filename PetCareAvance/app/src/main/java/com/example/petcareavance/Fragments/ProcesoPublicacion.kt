@@ -33,11 +33,13 @@ class ProcesoPublicacion : Fragment() {
     }
 
     private fun retroceder() {
-        val publicarFragment = PublicarFragment()
-        val transaction = requireFragmentManager().beginTransaction()
-        transaction.replace(R.id.fragment_container, publicarFragment)
-        transaction.addToBackStack(null)
-        transaction.commit()
+        parentFragmentManager.popBackStack()
+
+//        val publicarFragment = PublicarFragment()
+//        val transaction = requireFragmentManager().beginTransaction()
+//        transaction.replace(R.id.fragment_container, publicarFragment)
+//        transaction.addToBackStack(null)
+//        transaction.commit()
     }
 
     private fun avanzar() {

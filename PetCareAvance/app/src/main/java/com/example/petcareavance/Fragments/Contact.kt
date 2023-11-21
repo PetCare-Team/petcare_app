@@ -86,10 +86,12 @@ class Contact:Fragment() {
     }
 
     fun retroceder() {
-        val procesoPublicacionFragment = SoporteFragment()
-        val transaction: FragmentTransaction = requireFragmentManager().beginTransaction()
-        transaction.replace(R.id.fragment_container, procesoPublicacionFragment)
-        transaction.addToBackStack(null)
-        transaction.commit()
+        parentFragmentManager.popBackStack()
+
+//        val procesoPublicacionFragment = SoporteFragment()
+//        val transaction: FragmentTransaction = requireFragmentManager().beginTransaction()
+//        transaction.replace(R.id.fragment_container, procesoPublicacionFragment)
+//        transaction.addToBackStack(null)
+//        transaction.commit()
     }
 }

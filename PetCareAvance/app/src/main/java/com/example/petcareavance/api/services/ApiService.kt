@@ -89,6 +89,8 @@ interface ApiService {
     fun getPetById(@Path("id") id: Int): Call<PetResponse>
     @PUT("api/v1/pet/{id}")
     fun UpdatePet (@Path("id") id: Int ,@Body petInfo: SavePetResource): Call<SavePetResource>
+    @POST("api/v1/pet/")
+    fun CreatePet (@Body petInfo: SavePetResource): Call<SavePetResource>
 
     @GET("api/v1/reserva/byservice/{serviceId}")
     fun getReservaByPaymentId(@Path("serviceId") userId: String): Call<List<ReservaResponse>>

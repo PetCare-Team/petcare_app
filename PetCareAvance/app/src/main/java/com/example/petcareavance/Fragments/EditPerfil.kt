@@ -91,11 +91,13 @@ class EditPerfil : Fragment() {
     }
 
     private fun retroceder() {
-            val publicarFragment = SoporteFragment()
-        val transaction = requireFragmentManager().beginTransaction()
-        transaction.replace(R.id.fragment_container, publicarFragment)
-        transaction.addToBackStack(null)
-        transaction.commit()
+        parentFragmentManager.popBackStack()
+
+//            val publicarFragment = SoporteFragment()
+//        val transaction = requireFragmentManager().beginTransaction()
+//        transaction.replace(R.id.fragment_container, publicarFragment)
+//        transaction.addToBackStack(null)
+//        transaction.commit()
     }
 
     private fun updatePerfil( userId :String, token:String){

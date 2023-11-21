@@ -252,11 +252,12 @@ class MyServices : Fragment(){
     }
 
     private fun retroceder() {
+        parentFragmentManager.popBackStack()
 
-        val serviceInfo = ServicesDataFragment()
-        val transaction = requireFragmentManager().beginTransaction()
-        transaction.replace(R.id.fragment_container, serviceInfo)
-        transaction.addToBackStack(null)
-        transaction.commit()
+//        val serviceInfo = ServicesDataFragment()
+//        val transaction = requireFragmentManager().beginTransaction()
+//        transaction.replace(R.id.fragment_container, serviceInfo)
+//        transaction.addToBackStack(null)
+//        transaction.commit()
     }
 }

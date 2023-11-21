@@ -8,10 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.petcareavance.Fragments.CreatePet
+import com.example.petcareavance.Fragments.EditPerfil
 import com.example.petcareavance.R
 import com.example.petcareavance.api.dataclasses.pets.PetResponse
 import com.example.petcareavance.api.RetrofitClient
@@ -35,10 +38,23 @@ class PetFragmentVariation : Fragment() {
 
         val imReturn = view.findViewById<ImageView>(R.id.imReturn3)
         val rvListPet= view.findViewById<RecyclerView>(R.id.rvListPet)
+        val btnAgregarMascotaa = view.findViewById<TextView>(R.id.agregarmascota)
 
         val transaction = requireFragmentManager()
 
+        imReturn.setOnClickListener{
+            parentFragmentManager.popBackStack()
 
+        }
+
+
+        btnAgregarMascotaa.setOnClickListener {
+            val createPetFragment = CreatePet()
+            val transaction = parentFragmentManager.beginTransaction()
+            transaction.replace(R.id.fragment_container, createPetFragment)
+            transaction.addToBackStack(null)
+            transaction.commit()
+        }
 
         // Obtener User ID de SharedPreferences
         val sharedPreferences =
@@ -90,6 +106,7 @@ class PetFragmentVariation : Fragment() {
     class PetAdapter(private val petList: List<PetResponse>, private val transaction:FragmentManager) : RecyclerView.Adapter<PetAdapter.PetViewHolder>() {
 
         class PetViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+            val petIcon: ImageView = itemView.findViewById(R.id.imageView21)
             val petName: Button = itemView.findViewById(R.id.btNamePet)
 
         }
@@ -113,6 +130,19 @@ class PetFragmentVariation : Fragment() {
                 }
 
             }
+
+            holder.petIcon.setOnClickListener {
+                val editPetFragment = editPet()
+                val bundle = Bundle()
+                bundle.putInt(editPet.ARG_PERRO_ID, pet.id) // Utiliza la constante ARG_PERRO_ID
+                editPetFragment.arguments = bundle
+
+                val transaction = transaction.beginTransaction()
+                transaction.replace(R.id.fragment_container, editPetFragment)
+                transaction.addToBackStack(null)
+                transaction.commit()
+            }
+
 
         }
 

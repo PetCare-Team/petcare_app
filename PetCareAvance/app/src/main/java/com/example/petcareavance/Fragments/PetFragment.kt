@@ -1,20 +1,21 @@
 package com.example.petcareavance.Fragments.confirmservice
 
+import android.annotation.SuppressLint
 import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.petcareavance.Fragments.CreatePet
 import com.example.petcareavance.R
 import com.example.petcareavance.api.dataclasses.pets.PetResponse
 import com.example.petcareavance.api.RetrofitClient
@@ -35,10 +36,29 @@ class PetFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_pet, container, false)
 
-
+        val btnAgregarMascotaa = view.findViewById<TextView>(R.id.agregarmascota)
+        val btnregresar = view.findViewById<ImageView>(R.id.imReturn3)
         val rvListPet= view.findViewById<RecyclerView>(R.id.rvListPet)
 
+
+
+        btnAgregarMascotaa.setOnClickListener {
+            val createPetFragment = CreatePet()
+            val transaction = parentFragmentManager.beginTransaction()
+            transaction.replace(R.id.fragment_container, createPetFragment)
+            transaction.addToBackStack(null)
+            transaction.commit()
+        }
+        btnAgregarMascotaa.text = "XDDD"
+        btnregresar.setOnClickListener{
+
+            parentFragmentManager.popBackStack()
+
+        }
+
         val transaction = requireFragmentManager()
+
+
 
 
 
@@ -54,6 +74,7 @@ class PetFragment : Fragment() {
 
 
         val call = RetrofitClient.instance.getPetByUser("Bearer " + token,userId)
+
 
 
         call.enqueue(object : Callback<List<PetResponse>> {

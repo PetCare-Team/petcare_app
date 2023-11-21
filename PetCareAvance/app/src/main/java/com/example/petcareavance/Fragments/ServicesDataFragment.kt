@@ -56,11 +56,11 @@ class ServicesDataFragment : Fragment() {
         // Realizar la llamada a la API para obtener la lista de servicios
         val call = RetrofitClient.instance.getReservaByPaymentId(userId)
 
-        val btnAvanzar = view.findViewById<Button>(R.id.button3)
-
-        btnAvanzar.setOnClickListener {
-            avanzar()
-        }
+//        val btnAvanzar = view.findViewById<Button>(R.id.button3)
+//
+//        btnAvanzar.setOnClickListener {
+//            avanzar()
+//        }
 
 
         val btnretroceder = view.findViewById<ImageView>(R.id.imageView16)
@@ -115,12 +115,13 @@ class ServicesDataFragment : Fragment() {
     }
 
     private fun retroceder() {
+        parentFragmentManager.popBackStack()
 
-        val serviceInfo = ServicesDataFragment()
-        val transaction = requireFragmentManager().beginTransaction()
-        transaction.replace(R.id.fragment_container, serviceInfo)
-        transaction.addToBackStack(null)
-        transaction.commit()
+//        val serviceInfo = ServicesDataFragment()
+//        val transaction = requireFragmentManager().beginTransaction()
+//        transaction.replace(R.id.fragment_container, serviceInfo)
+//        transaction.addToBackStack(null)
+//        transaction.commit()
     }
 
     class ServiceAdapter(

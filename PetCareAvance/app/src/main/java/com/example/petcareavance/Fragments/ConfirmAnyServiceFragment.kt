@@ -135,8 +135,8 @@ class ConfirmAnyServiceFragment: Fragment() {
                 println("Formato de Hora incorrecto")
             }
 
-            Toast.makeText(requireContext(), "${sharedViewModel.selectedHour}", Toast.LENGTH_LONG)
-                .show()
+//            Toast.makeText(requireContext(), "${sharedViewModel.selectedHour}", Toast.LENGTH_LONG)
+//                .show()
 
         } else {
 
